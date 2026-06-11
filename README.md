@@ -39,8 +39,8 @@ This repository contains multiple browser-based games designed to strengthen:
 ## 📁 Project Structure
 Fun-Games-Collection/
 │
-├── 01-Number-Guessing-Game/
-├── 02-Rock-Paper-Scissors/
+├── 01-Number-Guessing-Game
+├── 02-Rock-Paper-Scissors
 ├── 03-Tic-Tac-Toe/
 ├── 04-Memory-Game/
 ├── 05-Whack-A-Mole/
