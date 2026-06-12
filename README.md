@@ -39,7 +39,7 @@ This repository contains multiple browser-based games designed to strengthen:
 
 | Game | Type | Status |
 |------|------|--------|
-| Number Guessing | Logic |   Done  |
+| Number Guessing | Logic |     Done  |
 | Rock Paper Scissors | Logic | 🚧 In Progress |
 | Tic Tac Toe | Strategy | ⏳ Upcoming |
 | Memory Game | Memory | ⏳ Upcoming |
