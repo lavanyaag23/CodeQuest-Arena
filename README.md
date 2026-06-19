@@ -1,94 +1,135 @@
 # 🎮 Fun Games Collection
 
-A collection of beginner to advanced interactive web games built using **HTML, CSS, and JavaScript** to improve frontend development, logic building, and problem-solving skills.
+A growing collection of interactive browser-based games built using **HTML, CSS, and JavaScript**.
 
-This project focuses on learning by building real games, starting from simple logic-based games to advanced canvas-based and algorithm-heavy games.
-
----
-
-## 🚀 Repository Description
-
-This repository contains multiple browser-based games designed to strengthen:
-- JavaScript fundamentals
-- DOM manipulation
-- Game logic development
-- UI/UX skills
-- Problem-solving ability
+This project is part of my journey to strengthen frontend development, JavaScript problem-solving, and game logic implementation through hands-on projects.
 
 ---
 
-## 🎯 Goals
+## 🚀 About the Project
 
-- Build 10+ interactive games
-- Improve JavaScript logic thinking
-- Learn frontend development practically
-- Practice consistent GitHub activity
-- Create a strong portfolio project
+Fun Games Collection is a repository of web-based games ranging from beginner-friendly logic games to advanced canvas-based games.
 
----
+Each game is built from scratch to practice:
 
-## 🧰 Tech Stack
-
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- React (planned future upgrade)
-
----
-## 🎮 Games Overview
-
-| Game | Type | Status |
-|------|------|--------|
-| Number Guessing | Logic |     Done  |
-| Rock Paper Scissors | Logic | 🚧 In Progress |
-| Tic Tac Toe | Strategy | ⏳ Upcoming |
-| Memory Game | Memory | ⏳ Upcoming |
-| Whack A Mole | Reaction | ⏳ Upcoming |
-| Snake Game | Arcade | ⏳ Upcoming |
-| Breakout Game | Physics | ⏳ Upcoming |
-| 2048 Game | Logic | ⏳ Upcoming |
-| Quiz Game | MCQ Logic | ⏳ Upcoming |
-| Sudoku Game | Algorithm | ⏳ Upcoming |
+* JavaScript fundamentals
+* DOM manipulation
+* Event handling
+* Game state management
+* UI/UX design
+* Problem-solving skills
 
 ---
 
-## 📚 What I Will Learn
+## 🛠️ Tech Stack
 
-- JavaScript problem solving
-- Event handling & DOM manipulation
-- Game state management
-- Arrays, loops, objects
-- Canvas API for advanced games
-- UI/UX design basics
-
----
-
-## 📈 Development Plan
-
-- Build 1 game every 3–5 days
-- Start simple → move to complex games
-- Maintain clean Git commits
-- Improve UI gradually after logic completion
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+* Canvas API
+* Git & GitHub
 
 ---
 
-## 🚀 Future Improvements
+## 🎮 Games Collection
 
-- Convert games into React components
-- Add score leaderboard (local storage)
-- Add animations and sound effects
-- Add mobile responsiveness improvements
+| Game                    | Category  | Status            |
+| ----------------------- | --------- | ----------------- |
+| 🎯 Number Guessing Game | Logic     | ✅ Completed       |
+| ✂️ Rock Paper Scissors  | Logic     | ✅ Completed       |
+| 🐍 Snake Game           | Arcade    | 🚧 In Development |
+| 🧠 Memory Card Game     | Memory    | ⏳ Planned         |
+| ⚡ Whack-A-Mole          | Reaction  | ⏳ Planned         |
+| 🎲 Tic Tac Toe          | Strategy  | ⏳ Planned         |
+| 🎮 2048 Game            | Logic     | ⏳ Planned         |
+| 🧩 Sudoku Solver        | Algorithm | ⏳ Planned         |
+| 📝 Quiz Game            | MCQ Logic | ⏳ Planned         |
+| 🧱 Breakout Game        | Arcade    | ⏳ Planned         |
 
 ---
 
-## 👨‍💻 Author
+## 🎯 Project Goals
 
-Lavanya Agrawal  
-B.Tech CSE (3rd Year)  
-UPES
+* Build 10+ interactive web games
+* Improve JavaScript development skills
+* Learn practical frontend development
+* Maintain consistent GitHub contributions
+* Create portfolio-ready projects
 
 ---
 
-## ⭐ Support
+## 📚 Skills Practiced
 
-If you like this project, give it a ⭐ and follow my journey in web development, DSA, and LeetCode.
+* DOM Manipulation
+* Event Handling
+* Arrays & Objects
+* Functions & Scope
+* Game Logic Development
+* Canvas API
+* Responsive Design
+* Git & GitHub Workflow
+
+---
+
+## 📈 Development Roadmap
+
+### Phase 1
+
+* ✅ Number Guessing Game
+* ✅ Rock Paper Scissors
+* 🚧 Snake Game
+
+### Phase 2
+
+* Memory Card Game
+* Tic Tac Toe
+* Whack-A-Mole
+
+### Phase 3
+
+* 2048 Game
+* Breakout Game
+* Sudoku Solver
+
+### Phase 4
+
+* Build a centralized **Game Hub Website**
+* Deploy all games online
+* Add leaderboards and achievements
+* Improve mobile responsiveness
+
+---
+
+## 🔮 Future Enhancements
+
+* React-based Game Hub
+* Dark/Light Theme Toggle
+* Local Storage High Scores
+* Sound Effects & Animations
+* Online Multiplayer Features
+* Leaderboards & Achievements
+
+---
+
+## 👩‍💻 Author
+
+**Lavanya Agrawal**
+
+* B.Tech CSE Student
+* Java Developer
+* Frontend Developer
+* DSA Learner
+
+### Portfolio
+
+https://lavanyaagrawal.vercel.app/
+
+### GitHub
+
+https://github.com/lavanyaag23
+
+---
+
+## ⭐ Show Your Support
+
+If you like this project, consider giving it a ⭐ and follow my journey in software development, web development, and problem solving.
