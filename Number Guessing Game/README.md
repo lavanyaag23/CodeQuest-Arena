@@ -7,22 +7,26 @@ A polished, feature-rich browser-based number guessing game built with pure HTML
 ## 📁 Project Structure
 
 ```
-numgame/
-├── index.html   → Markup & 4-screen layout
-├── style.css    → Theming, animations, responsive design
-├── script.js    → Game logic, audio, leaderboard, confetti
-└── README.md    → You're here
+Number Guessing Game/
+├── README.md
+├── Index.html
+├── script.js
+├── style.css
+└── Screenshots/
+    ├── start.png
+    ├── gameplay.png
+    └── win.png
 ```
 ## 📸 Screenshots
 
-### Game Start
-![Start](screenshots/start.png)
+### Start Screen
+![Start Screen](Screenshots/start.png)
 
 ### Gameplay
-![Gameplay](screenshots/gameplay.png)
+![Gameplay](Screenshots/gameplay.png)
 
-### Win Screen
-![Win](screenshots/win.png)
+### Winning Screen
+![Winning Screen](Screenshots/win.png)
 ---
 
 ## ✨ Features

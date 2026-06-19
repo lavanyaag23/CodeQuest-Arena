@@ -39,8 +39,8 @@ This repository contains multiple browser-based games designed to strengthen:
 
 | Game | Type | Status |
 |------|------|--------|
-| Number Guessing | Logic | 🚧 In Progress |
-| Rock Paper Scissors | Logic | ⏳ Upcoming |
+| Number Guessing | Logic |     Done  |
+| Rock Paper Scissors | Logic | 🚧 In Progress |
 | Tic Tac Toe | Strategy | ⏳ Upcoming |
 | Memory Game | Memory | ⏳ Upcoming |
 | Whack A Mole | Reaction | ⏳ Upcoming |
