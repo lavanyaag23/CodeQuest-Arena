@@ -1,25 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Card Game</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Card Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>🧠 Memory Card Game</h1>
-
-        <div class="stats">
-            Moves: <span id="moves">0</span>
+<div class="app">
+  <div class="panel">
+    <header>
+      <h1>🧠 Memory Card Game</h1>
+      <div class="stats-row">
+        <div class="stat-pill">
+          <span class="stat-label">Moves</span>
+          <span class="stat-value" id="moves">0</span>
         </div>
+        <div class="stat-pill">
+          <span class="stat-label">Time</span>
+          <span class="stat-value" id="timer">00:00</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Best</span>
+          <span class="stat-value" id="bestStat">--</span>
+        </div>
+      </div>
+    </header>
 
-        <div class="game-board" id="gameBoard"></div>
-
-        <button onclick="startGame()">Restart Game</button>
+    <div class="difficulty-row" id="difficultyRow">
+      <button class="diff-btn active" data-diff="easy">Easy</button>
+      <button class="diff-btn" data-diff="medium">Medium</button>
+      <button class="diff-btn" data-diff="hard">Hard</button>
     </div>
 
-    <script src="script.js"></script>
+    <div class="board" id="board"></div>
+
+    <button class="reset-btn" id="restartBtn">Restart Game</button>
+  </div>
+
+  <div class="win-overlay hidden" id="winOverlay">
+    <div class="win-modal">
+      <h2>🎉 You Win!</h2>
+      <p>Moves: <span id="winMoves">0</span></p>
+      <p>Time: <span id="winTime">00:00</span></p>
+      <p class="best-tag hidden" id="newBestTag">🏆 New Best!</p>
+      <button class="primary-btn" id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
