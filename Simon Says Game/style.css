@@ -1,0 +1,30 @@
+body{
+    text-align:center;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
+}
+
+.container{
+    width:300px;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.btn{
+    width:140px;
+    height:140px;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.red{background:red;}
+.green{background:green;}
+.blue{background:blue;}
+.yellow{background:gold;}
+
+.flash{
+    opacity:0.3;
+}
