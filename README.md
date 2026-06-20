@@ -1,6 +1,19 @@
+<div align="center">
+
 # 🎮 Fun Games Collection
 
-A growing collection of interactive browser-based games built using **HTML, CSS, and JavaScript**.
+### A growing collection of interactive browser-based games — built with HTML, CSS & JavaScript
+
+[![Made with HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![Made with CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![Made with JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)](#)
+[![No Frameworks](https://img.shields.io/badge/Frameworks-None-a855f7?style=for-the-badge)](#)
+
+![Games Completed](https://img.shields.io/badge/games%20completed-5-a855f7?style=flat-square)
+![Status](https://img.shields.io/badge/status-active-a855f7?style=flat-square)
+![Made with](https://img.shields.io/badge/made%20with-%E2%9D%A4-c084fc?style=flat-square)
+
+</div>
 
 This project is part of my journey to strengthen frontend development, JavaScript problem-solving, and game logic implementation through hands-on projects.
 
@@ -8,9 +21,7 @@ This project is part of my journey to strengthen frontend development, JavaScrip
 
 ## 🚀 About the Project
 
-Fun Games Collection is a repository of web-based games ranging from beginner-friendly logic games to advanced canvas-based games.
-
-Each game is built from scratch to practice:
+Fun Games Collection is a repository of web-based games ranging from beginner-friendly logic games to advanced canvas-based games. Each game is built from scratch to practice:
 
 * JavaScript fundamentals
 * DOM manipulation
@@ -27,23 +38,25 @@ Each game is built from scratch to practice:
 * CSS3
 * JavaScript (ES6+)
 * Canvas API
+* Web Audio API
 * Git & GitHub
 
 ---
 
 ## 🎮 Games Collection
 
-| Game                    | Category  | Status            |
-| ----------------------- | --------- | ----------------- |
-| 🎯 Number Guessing Game | Logic     | ✅ Completed       |
-| ✂️ Rock Paper Scissors  | Logic     | ✅ Completed       |
-| 🐍 Snake Game           | Arcade    | 🚧 In Development |
-| 🧠 Memory Card Game     | Memory    | ⏳ Planned         |
-| ⚡ Whack-A-Mole          | Reaction  | ⏳ Planned         |
-| 🎮 2048 Game            | Logic     | ⏳ Planned         |
-| 🧩 Sudoku Solver        | Algorithm | ⏳ Planned         |
-| 📝 Quiz Game            | MCQ Logic | ⏳ Planned         |
-| 🧱 Breakout Game        | Arcade    | ⏳ Planned         |
+| Game                     | Category  | Status            |
+| ------------------------ | --------- | ------------------ |
+| 🎯 Number Guessing Game  | Logic     | ✅ Completed        |
+| ✂️ Rock Paper Scissors   | Logic     | ✅ Completed        |
+| 🐍 Snake Game            | Arcade    | ✅ Completed        |
+| 🧠 Memory Card Game      | Memory    | ✅ Completed        |
+| ⚡ Whack-A-Mole           | Reaction  | ✅ Completed        |
+| 🎵 Simon Says            | Memory    | ✅ Completed        |
+| 🎮 2048 Game             | Logic     | ⏳ Planned          |
+| 🧩 Sudoku Solver         | Algorithm | ⏳ Planned          |
+| 📝 Quiz Game             | MCQ Logic | ⏳ Planned          |
+| 🧱 Breakout Game         | Arcade    | ⏳ Planned          |
 
 ---
 
@@ -65,6 +78,8 @@ Each game is built from scratch to practice:
 * Functions & Scope
 * Game Logic Development
 * Canvas API
+* Web Audio API (procedural sound effects)
+* `localStorage` (high scores & best records)
 * Responsive Design
 * Git & GitHub Workflow
 
@@ -73,24 +88,22 @@ Each game is built from scratch to practice:
 ## 📈 Development Roadmap
 
 ### Phase 1
-
 * ✅ Number Guessing Game
 * ✅ Rock Paper Scissors
-* 🚧 Snake Game
+* ✅ Snake Game
 
 ### Phase 2
-
-* Memory Card Game
-* Whack-A-Mole
+* ✅ Memory Card Game
+* ✅ Whack-A-Mole
+* ✅ Simon Says
 
 ### Phase 3
-
-* 2048 Game
-* Breakout Game
-* Sudoku Solver
+* 🎮 2048 Game
+* 🧱 Breakout Game
+* 🧩 Sudoku Solver
+* 📝 Quiz Game
 
 ### Phase 4
-
 * Build a centralized **Game Hub Website**
 * Deploy all games online
 * Add leaderboards and achievements
@@ -102,10 +115,10 @@ Each game is built from scratch to practice:
 
 * React-based Game Hub
 * Dark/Light Theme Toggle
-* Local Storage High Scores
-* Sound Effects & Animations
+* Global Leaderboards & Achievements
 * Online Multiplayer Features
-* Leaderboards & Achievements
+
+> ✅ Local Storage high scores and sound effects/animations are already implemented across the completed games above.
 
 ---
 
@@ -119,11 +132,9 @@ Each game is built from scratch to practice:
 * DSA Learner
 
 ### Portfolio
-
 https://lavanyaagrawal.vercel.app/
 
 ### GitHub
-
 https://github.com/lavanyaag23
 
 ---
