@@ -89,3 +89,32 @@ themeButton.addEventListener("click", ()=>{
     }
 
 });
+
+const gameCards = document.querySelectorAll(".game-card");
+
+let games = 0;
+let developer = 0;
+
+gameCards.forEach(card => {
+
+    const category = card.dataset.category;
+
+    if(category.includes("games")){
+
+        games++;
+
+    }
+
+    if(category.includes("developer")){
+
+        developer++;
+
+    }
+
+});
+
+document.getElementById("gamesCount").textContent = games;
+
+document.getElementById("devCount").textContent = developer;
+
+document.getElementById("totalCount").textContent = games + developer;

@@ -432,3 +432,29 @@ background:#7c3aed;
 color:white;
 
 }
+
+.stat-value{
+
+font-size:28px;
+
+font-weight:700;
+
+animation:pop .8s;
+
+}
+
+@keyframes pop{
+
+0%{
+
+transform:scale(0);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
