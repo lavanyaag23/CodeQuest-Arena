@@ -118,89 +118,74 @@
     <!-- ══════════════════════════════════════
          PLAYER PROFILE + XP
     ══════════════════════════════════════ -->
-    <section class="profile-section" aria-label="Player profile">
-      <div class="profile-card">
+    <section class="dashboard">
 
-        <div class="profile-left">
-          <div class="avatar" id="avatar">🎮</div>
-          <div class="profile-meta">
-            <h2 class="player-name" id="playerName">Guest Player</h2>
-            <p class="player-title" id="playerTitle">Newcomer</p>
-          </div>
+    <div class="dashboard-left">
+
+        <div class="profile-avatar">
+            👩‍💻
         </div>
 
-        <div class="profile-right">
-          <div class="xp-row">
-            <span class="xp-label">Level <strong id="levelNum">1</strong></span>
-            <span class="xp-val" id="xpVal">0 / 100 XP</span>
-          </div>
-          <div class="xp-track">
-            <div class="xp-fill" id="xpFill" data-width="0%"></div>
-          </div>
-          <div class="profile-chips">
-            <div class="pchip">
-              <span class="pchip-icon">🏆</span>
-              <span class="pchip-val" id="achieveCount">0</span>
-              <span class="pchip-lbl">Achievements</span>
+        <div>
+
+            <h2>Lavanya Agrawal</h2>
+
+            <p class="player-rank">
+                Level <span id="levelNum">1</span> •
+                <span id="playerTitle">Explorer</span>
+            </p>
+
+            <div class="xp-bar">
+
+                <div class="xp-fill" id="xpFill"></div>
+
             </div>
-            <div class="pchip">
-              <span class="pchip-icon">🎮</span>
-              <span class="pchip-val" id="gamesPlayedCount">0</span>
-              <span class="pchip-lbl">Played</span>
-            </div>
-            <div class="pchip">
-              <span class="pchip-icon">❤️</span>
-              <span class="pchip-val" id="favCount">0</span>
-              <span class="pchip-lbl">Favorites</span>
-            </div>
-          </div>
+
+            <small id="xpVal">
+                0 / 100 XP
+            </small>
+
         </div>
 
-      </div>
-    </section>
+    </div>
 
-    <!-- ══════════════════════════════════════
-         STATS PANEL
-    ══════════════════════════════════════ -->
-    <section class="stats-section" aria-label="Collection stats">
-      <div class="stats-row">
-        <div class="stat-card">
-          <span class="stat-num" id="gamesCount">7</span>
-          <span class="stat-lbl">Games</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num" id="devCount">6</span>
-          <span class="stat-lbl">Dev Lab</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-num" id="totalCount">13</span>
-          <span class="stat-lbl">Total</span>
-        </div>
-        <div class="stat-card highlight">
-          <span class="stat-num" id="latestProject">RPS</span>
-          <span class="stat-lbl">Latest</span>
-        </div>
-      </div>
-    </section>
+    <div class="dashboard-right">
 
-    <!-- ══════════════════════════════════════
-         RECENTLY PLAYED
-    ══════════════════════════════════════ -->
-    <section class="recent-section hidden" id="recentSection" aria-label="Recently played">
-      <h2 class="section-title">
-        <span class="stitle-icon">🕒</span> Recently Played
-        <button class="clear-recent-btn" id="clearRecent" title="Clear history">✕ Clear</button>
-      </h2>
-      <div class="recent-row" id="recentRow"></div>
-    </section>
+        <div class="stat-box">
 
-    <!-- ══════════════════════════════════════
-         FAVORITES
-    ══════════════════════════════════════ -->
-    <section class="fav-section hidden" id="favSection" aria-label="Favorite games">
-      <h2 class="section-title"><span class="stitle-icon">❤️</span> Favorites</h2>
-      <div class="recent-row" id="favRow"></div>
-    </section>
+            <h3 id="gamesPlayedCount">0</h3>
+
+            <p>Games Played</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <h3 id="favCount">0</h3>
+
+            <p>Favorites</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <h3 id="achieveCount">0</h3>
+
+            <p>Achievements</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <h3 id="streakCount">7</h3>
+
+            <p>Current Streak</p>
+
+        </div>
+
+    </div>
+
+</section>
 
     <!-- ══════════════════════════════════════
          ACHIEVEMENTS
