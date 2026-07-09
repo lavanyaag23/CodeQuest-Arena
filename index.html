@@ -1,1191 +1,431 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CodeQuest Arena | Lavanya Agrawal</title>
-
-    <meta name="description"
-        content="Play JavaScript games, improve coding skills, solve developer challenges and level up your frontend journey.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CodeQuest Arena · Browser Gaming Platform</title>
+  <meta name="description" content="CodeQuest Arena — browser games, XP, achievements & daily challenges."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
 
-    <!-- Ambient Background -->
+  <!-- Toasts + popups (outside sidebar/page) -->
+  <div class="toast" id="toast"></div>
+  <div class="achieve-popup hidden" id="achievePopup">
+    <div class="ap-icon" id="apIcon"></div>
+    <div><p class="ap-label">Achievement Unlocked!</p><p class="ap-name" id="apName"></p><p class="ap-xp" id="apXp"></p></div>
+  </div>
+  <div id="xpFloats" aria-hidden="true"></div>
 
-    <div class="ambient-grid"></div>
+  <!-- Mobile hamburger -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+  <div class="sidebar-overlay hidden" id="sidebarOverlay"></div>
 
-    <div class="ambient-blob b1"></div>
+  <!-- ══════════════════════════════════════
+       SIDEBAR
+  ══════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
 
-    <div class="ambient-blob b2"></div>
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">🕹️</div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-logo-abbr">CQA</span>
+        <span class="sidebar-logo-name">CodeQuest Arena</span>
+      </div>
+    </div>
 
-    <main class="page">
+    <button class="sidebar-cta" id="sidebarCta">🎮 Start Playing</button>
 
-        <!-- ========================================= -->
-        <!-- HERO -->
-        <!-- ========================================= -->
+    <nav class="sidebar-nav">
+      <a class="nav-link active" href="#" data-scroll="gamesGrid"><span class="nav-icon">🎮</span> All Games</a>
+      <a class="nav-link" href="#" data-scroll="devGrid"><span class="nav-icon">🧪</span> Developer Lab</a>
 
-        <header class="hero">
+      <p class="nav-section-label">Explore</p>
+      <a class="nav-link" href="#" data-scroll="achievementContainer"><span class="nav-icon">🏆</span> Achievements</a>
+      <a class="nav-link" href="#" data-scroll="dailyPanel"><span class="nav-icon">🔥</span> Daily Challenge</a>
+      <a class="nav-link" href="#" data-scroll="favSection"><span class="nav-icon">❤️</span> Favorites</a>
+      <a class="nav-link" href="#" data-scroll="lbSection"><span class="nav-icon">📊</span> Leaderboard</a>
 
-            <nav class="navbar">
+      <p class="nav-section-label">Account</p>
+      <a class="nav-link" href="#" id="navProfile"><span class="nav-icon">👤</span> Profile</a>
+      <a class="nav-link" href="#" id="navSettings"><span class="nav-icon">⚙️</span> Settings</a>
+    </nav>
 
-                <div class="logo">
+    <!-- mini profile bottom -->
+    <div class="sidebar-profile">
+      <div class="sidebar-profile-card">
+        <div class="sidebar-profile-top">
+          <div class="sidebar-avatar" id="sidebarAvatar">🎮</div>
+          <div>
+            <div class="sidebar-player-name" id="sidebarName">Guest Player</div>
+            <div class="sidebar-player-title" id="sidebarTitle">Newcomer</div>
+          </div>
+        </div>
+        <div class="sidebar-level">Level <strong id="sidebarLevel">1</strong> &nbsp;·&nbsp; <span id="sidebarXpNums">0 / 100 XP</span></div>
+        <div class="sidebar-xp-track"><div class="sidebar-xp-fill" id="sidebarXpFill" style="width:0%"></div></div>
+        <div class="sidebar-theme-row">
+          <span class="sidebar-theme-label">🖥️ Theme</span>
+          <button class="sidebar-theme-btn" id="themeToggle"><span class="theme-icon">🌙</span> Dark</button>
+        </div>
+      </div>
+    </div>
 
-                    <span class="logo-box">CQA</span>
+    <p class="sidebar-copy">© 2025 CodeQuest Arena<br/>Level up. Code. Play. Repeat.</p>
+  </aside>
 
-                    <span>CodeQuest Arena</span>
+  <!-- ══════════════════════════════════════
+       MAIN PAGE
+  ══════════════════════════════════════ -->
+  <main class="page">
 
-                </div>
+    <!-- HEADER -->
+    <header class="hub-header">
+      <div class="header-left">
+        <div class="brand"><span class="lb">[</span><span class="brand-name">CQA</span><span class="lb">]</span></div>
+        <h1 class="hub-title">CodeQuest <em>Arena</em></h1>
+        <p class="hub-sub">Browser games &amp; developer challenges —<br/>built with vanilla HTML, CSS &amp; JS.</p>
+      </div>
+      <div class="header-right">
+        <button class="theme-btn" id="themeToggleTop"><span class="theme-icon">🌙</span> Dark Mode</button>
+        <div class="header-decor">
+          <div class="decor-controller">🎮</div>
+          <div class="decor-dot decor-dot-1"></div>
+          <div class="decor-dot decor-dot-2"></div>
+          <div class="decor-sq decor-sq-1"></div>
+          <div class="decor-sq decor-sq-2"></div>
+        </div>
+      </div>
+    </header>
 
-                <div class="nav-links">
+    <!-- PLAYER DASHBOARD -->
+    <section class="player-dashboard" aria-label="Player dashboard">
+      <div class="pd-avatar" id="pdAvatar" title="Change avatar">🎮</div>
+      <div class="pd-info">
+        <div class="pd-name-row">
+          <span class="pd-name" id="pdName">Guest Player</span>
+          <span class="pd-title-badge" id="pdTitle">NEWCOMER</span>
+        </div>
+        <div class="pd-level-xp">
+          Level <strong id="pdLevel">1</strong>
+          <div class="pd-xp-track"><div class="pd-xp-fill" id="pdXpFill" style="width:0%"></div></div>
+          <span class="pd-xp-nums" id="pdXpNums">0 / 100 XP</span>
+        </div>
+      </div>
+      <div class="pd-stats">
+        <div class="pd-chip"><span class="pd-chip-icon">🏆</span><span class="pd-chip-val" id="pdAchieve">0</span><span class="pd-chip-lbl">Achievements</span></div>
+        <div class="pd-chip"><span class="pd-chip-icon">🎮</span><span class="pd-chip-val" id="pdPlayed">0</span><span class="pd-chip-lbl">Played</span></div>
+        <div class="pd-chip"><span class="pd-chip-icon">❤️</span><span class="pd-chip-val" id="pdFavs">0</span><span class="pd-chip-lbl">Favorites</span></div>
+        <div class="pd-chip"><span class="pd-chip-icon">🔥</span><span class="pd-chip-val" id="pdStreak">0</span><span class="pd-chip-lbl">Day Streak</span></div>
+      </div>
+    </section>
 
-                    <a href="#gamesGrid">Games</a>
+    <!-- STATS ROW -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-card-icon sci-purple">🎮</div><div class="stat-text"><span class="stat-num" id="gamesCount">7</span><span class="stat-lbl">Games</span></div></div>
+      <div class="stat-card"><div class="stat-card-icon sci-cyan">&lt;/&gt;</div><div class="stat-text"><span class="stat-num" id="devCount">6</span><span class="stat-lbl">Dev Lab</span></div></div>
+      <div class="stat-card"><div class="stat-card-icon sci-orange">⭐</div><div class="stat-text"><span class="stat-num" id="totalCount">13</span><span class="stat-lbl">Total</span></div></div>
+      <div class="stat-card"><div class="stat-card-icon sci-green">🕒</div><div class="stat-text"><span class="stat-num" id="latestPlayed" style="font-size:.95rem">—</span><span class="stat-lbl">Latest Played</span></div></div>
+    </div>
 
-                    <a href="#developerLab">Developer Lab</a>
+    <!-- CONTINUE PLAYING -->
+    <section class="recent-section hidden" id="recentSection" aria-label="Continue playing">
+      <div class="section-title-row">
+        <h2 class="section-title"><span class="stitle-icon">🕒</span> Continue Playing</h2>
+        <button class="clear-btn" id="clearRecent">✕ Clear</button>
+      </div>
+      <div class="recent-row" id="recentRow"></div>
+    </section>
 
-                    <a href="#achievementContainer">Achievements</a>
+    <!-- FAVORITES -->
+    <section class="fav-section hidden" id="favSection" aria-label="Favorites">
+      <h2 class="section-title"><span class="stitle-icon">❤️</span> Favorites</h2>
+      <div class="mini-cards-row" id="favRow"></div>
+    </section>
 
-                </div>
+    <!-- SEARCH + FILTER -->
+    <section class="search-filter-section" aria-label="Search and filter">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search games or challenges…" autocomplete="off"/>
+        <button class="search-clear hidden" id="searchClear">✕</button>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All <span class="filter-count" id="fc-all"></span></button>
+        <button class="filter-btn" data-filter="games">Games <span class="filter-count" id="fc-games"></span></button>
+        <button class="filter-btn" data-filter="developer">Dev Lab <span class="filter-count" id="fc-developer"></span></button>
+        <button class="filter-btn" data-filter="logic">Logic <span class="filter-count" id="fc-logic"></span></button>
+        <button class="filter-btn" data-filter="arcade">Arcade <span class="filter-count" id="fc-arcade"></span></button>
+        <button class="filter-btn" data-filter="memory">Memory <span class="filter-count" id="fc-memory"></span></button>
+      </div>
+      <div class="no-results hidden" id="noResults"><span>😔</span><p>No games found.</p></div>
+    </section>
 
-                <button id="themeToggle" class="theme-btn">
+    <!-- GAMES GRID -->
+    <section aria-label="Games">
+      <h2 class="section-title" id="gamesTitle"><span class="stitle-icon">🎮</span> Game Collection</h2>
+      <div class="game-grid" id="gamesGrid">
 
-                    🌙
-
-                </button>
-
-            </nav>
-
-            <div class="hero-content">
-
-                <div class="hero-left">
-
-                    <span class="hero-tag">
-
-                        🚀 JavaScript Gaming Platform
-
-                    </span>
-
-                    <h1>
-
-                        Play.<br>
-
-                        Learn.<br>
-
-                        Build.
-
-                    </h1>
-
-                    <p>
-
-                        Explore interactive JavaScript games, sharpen your
-                        programming skills, earn achievements and level up
-                        your coding journey—all inside one modern gaming arena.
-
-                    </p>
-
-                    <div class="hero-buttons">
-
-                        <a href="#gamesGrid" class="primary-btn">
-
-                            🎮 Explore Games
-
-                        </a>
-
-                        <a href="#developerLab" class="secondary-btn">
-
-                            💻 Developer Lab
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <div class="hero-right">
-
-                    <div class="featured-card">
-
-                        <div class="featured-label">
-
-                            🔥 Featured Challenge
-
-                        </div>
-
-                        <div class="featured-icon">
-
-                            ☄️
-
-                        </div>
-
-                        <h2>Chaos Button</h2>
-
-                        <p>
-
-                            One click. One random coding challenge.
-                            Improve your JavaScript every day.
-
-                        </p>
-
-                        <a href="Developer-Lab/Chaos-Button/index.html"
-                            class="launch-btn">
-
-                            Launch →
-
-                        </a>
-
-                    </div>
-
-                </div>
-
+        <a class="game-card" href="Number-Guessing-Game/" data-name="number guessing logic" data-category="games logic" data-id="numguess">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🎯</div></div>
+          <button class="fav-btn" data-id="numguess" onclick="event.preventDefault();event.stopPropagation()">♡</button>
+          <div class="played-badge hidden" data-id="numguess">✓</div>
+          <div class="card-body">
+            <h3>Number Guessing</h3>
+            <span class="card-category">Logic</span>
+            <div class="card-meta"><span class="game-tag tag-logic">Logic</span><span class="game-tag tag-diff">Easy–Hard</span></div>
+            <div class="best-score" id="best-numguess"></div>
+            <div class="card-actions">
+              <button class="play-btn">Play Now</button>
+              <button class="card-fav-btn" data-id="numguess">♡</button>
             </div>
+          </div>
+        </a>
 
-        </header>
-
-        <!-- ========================================= -->
-        <!-- PLAYER DASHBOARD -->
-        <!-- ========================================= -->
-
-        <section id="profile" class="dashboard">
-
-            <div class="dashboard-left">
-
-                <div class="profile-avatar">
-
-                    👩‍💻
-
-                </div>
-
-                <div>
-
-                    <h2>Lavanya Agrawal</h2>
-
-                    <p class="player-rank">
-
-                        Level
-
-                        <span id="levelNum">1</span>
-
-                        •
-
-                        <span id="playerTitle">
-
-                            Explorer
-
-                        </span>
-
-                    </p>
-
-                    <div class="xp-bar">
-
-                        <div class="xp-fill"
-                            id="xpFill">
-
-                        </div>
-
-                    </div>
-
-                    <small id="xpVal">
-
-                        0 / 100 XP
-
-                    </small>
-
-                </div>
-
+        <a class="game-card" href="Rock-Paper-Scissors/" data-name="rock paper scissors logic" data-category="games logic" data-id="rps">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">✂️</div></div>
+          <div class="played-badge hidden" data-id="rps">✓</div>
+          <div class="card-body">
+            <h3>Rock Paper Scissors</h3>
+            <span class="card-category">Classic</span>
+            <div class="card-meta"><span class="game-tag tag-logic">Logic</span><span class="game-tag tag-diff">Bo3–Bo7</span></div>
+            <div class="best-score" id="best-rps"></div>
+            <div class="card-actions">
+              <button class="play-btn">Play Now</button>
+              <button class="card-fav-btn" data-id="rps">♡</button>
             </div>
+          </div>
+        </a>
 
-            <div class="dashboard-right">
-
-                <div class="stat-box">
-
-                    <h3 id="gamesPlayedCount">
-
-                        0
-
-                    </h3>
-
-                    <p>
-
-                        Games Played
-
-                    </p>
-
-                </div>
-
-                <div class="stat-box">
-
-                    <h3 id="favCount">
-
-                        0
-
-                    </h3>
-
-                    <p>
-
-                        Favorites
-
-                    </p>
-
-                </div>
-
-                <div class="stat-box">
-
-                    <h3 id="achieveCount">
-
-                        0
-
-                    </h3>
-
-                    <p>
-
-                        Achievements
-
-                    </p>
-
-                </div>
-
-                <div class="stat-box">
-
-                    <h3 id="streakCount">
-
-                        7
-
-                    </h3>
-
-                    <p>
-
-                        Day Streak
-
-                    </p>
-
-                </div>
-
+        <a class="game-card" href="Snake-Game/" data-name="snake game arcade" data-category="games arcade" data-id="snake">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🐍</div></div>
+          <div class="played-badge hidden" data-id="snake">✓</div>
+          <div class="card-body">
+            <h3>Snake Game</h3>
+            <span class="card-category">Arcade</span>
+            <div class="card-meta"><span class="game-tag tag-arcade">Arcade</span></div>
+            <div class="best-score" id="best-snake"></div>
+            <div class="card-actions">
+              <button class="play-btn">Play Now</button>
+              <button class="card-fav-btn" data-id="snake">♡</button>
             </div>
+          </div>
+        </a>
 
-        </section>
-
-                <!-- ========================================= -->
-        <!-- ACHIEVEMENTS -->
-        <!-- ========================================= -->
-
-        <section class="achieve-section">
-
-            <h2 class="section-title">
-
-                🏆 Achievements
-
-            </h2>
-
-            <p class="section-sub">
-
-                Unlock badges as you play games and complete coding challenges.
-
-            </p>
-
-            <div class="achieve-grid"
-                 id="achievementContainer">
-
+        <a class="game-card" href="Memory-Card-Game/" data-name="memory card matching" data-category="games memory" data-id="memory">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🧠</div></div>
+          <div class="played-badge hidden" data-id="memory">✓</div>
+          <div class="card-body">
+            <h3>Memory Card</h3>
+            <span class="card-category">Memory</span>
+            <div class="card-meta"><span class="game-tag tag-memory">Memory</span></div>
+            <div class="best-score" id="best-memory"></div>
+            <div class="card-actions">
+              <button class="play-btn">Play Now</button>
+              <button class="card-fav-btn" data-id="memory">♡</button>
             </div>
+          </div>
+        </a>
 
-        </section>
-
-
-
-        <!-- ========================================= -->
-        <!-- SEARCH + FILTER -->
-        <!-- ========================================= -->
-
-        <section class="search-filter-section">
-
-            <div class="search-wrap">
-
-                <span class="search-icon">
-
-                    🔍
-
-                </span>
-
-                <input
-                    id="searchInput"
-                    class="search-input"
-                    type="text"
-                    placeholder="Search games or developer challenges..."
-                >
-
-                <button
-                    id="searchClear"
-                    class="search-clear hidden">
-
-                    ✕
-
-                </button>
-
+        <a class="game-card" href="Simon-Says-Game/" data-name="simon says memory" data-category="games memory" data-id="simon">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🎵</div></div>
+          <div class="played-badge hidden" data-id="simon">✓</div>
+          <div class="card-body">
+            <h3>Simon Says</h3>
+            <span class="card-category">Memory</span>
+            <div class="card-meta"><span class="game-tag tag-memory">Memory</span></div>
+            <div class="best-score" id="best-simon"></div>
+            <div class="card-actions">
+              <button class="play-btn">Play Now</button>
+              <button class="card-fav-btn" data-id="simon">♡</button>
             </div>
+          </div>
+        </a>
 
-
-            <div class="filter-row">
-
-                <button class="filter-btn active"
-                        data-filter="all">
-
-                    All
-
-                    <span id="fc-all"
-                          class="filter-count"></span>
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="games">
-
-                    Games
-
-                    <span id="fc-games"
-                          class="filter-count"></span>
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="developer">
-
-                    Developer Lab
-
-                    <span id="fc-developer"
-                          class="filter-count"></span>
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="logic">
-
-                    Logic
-
-                    <span id="fc-logic"
-                          class="filter-count"></span>
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="arcade">
-
-                    Arcade
-
-                    <span id="fc-arcade"
-                          class="filter-count"></span>
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="memory">
-
-                    Memory
-
-                    <span id="fc-memory"
-                          class="filter-count"></span>
-
-                </button>
-
+        <a class="game-card" href="Whack-A-Mole/" data-name="whack a mole reaction arcade" data-category="games arcade" data-id="whack">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">⚡</div></div>
+          <div class="played-badge hidden" data-id="whack">✓</div>
+          <div class="card-body">
+            <h3>Whack-A-Mole</h3>
+            <span class="card-category">Arcade</span>
+            <div class="card-meta"><span class="game-tag tag-arcade">Arcade</span><span class="game-tag tag-reaction">Reaction</span></div>
+            <div class="best-score" id="best-whack"></div>
+            <div class="card-actions">
+              <button class="play-btn">Play Now</button>
+              <button class="card-fav-btn" data-id="whack">♡</button>
             </div>
+          </div>
+        </a>
 
-            <div
-                id="noResults"
-                class="no-results hidden">
-
-                <span>😔</span>
-
-                <p>
-
-                    No games found.
-
-                </p>
-
+        <a class="game-card" href="2048-Game/" data-name="2048 puzzle logic" data-category="games logic" data-id="2048">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🎮</div></div>
+          <div class="played-badge hidden" data-id="2048">✓</div>
+          <div class="card-body">
+            <h3>2048 Game</h3>
+            <span class="card-category">Puzzle</span>
+            <div class="card-meta"><span class="game-tag tag-logic">Logic</span></div>
+            <div class="best-score" id="best-2048"></div>
+            <div class="card-actions">
+              <button class="play-btn">Play Now</button>
+              <button class="card-fav-btn" data-id="2048">♡</button>
             </div>
-
-        </section>
-
-
-
-        <!-- ========================================= -->
-        <!-- GAMES -->
-        <!-- ========================================= -->
-
-        <section>
-
-            <h2 class="section-title">
-
-                🎮 Games Collection
-
-            </h2>
-
-            <div class="game-grid"
-                 id="gamesGrid">
-
-
-                <!-- Number Guessing -->
-
-                <a
-                    href="Number-Guessing-Game/"
-                    class="game-card"
-                    data-id="numguess"
-                    data-category="games logic"
-                    data-name="number guessing">
-
-                    <button class="fav-btn"
-                            data-id="numguess">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🎯
-
-                    </div>
-
-                    <h3>
-
-                        Number Guessing
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Guess the hidden number with smart hints.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-logic">
-
-                            Logic
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Easy
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        ▶ Play
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- Rock Paper Scissors -->
-
-                <a
-                    href="Rock-Paper-Scissors/"
-                    class="game-card"
-                    data-id="rps"
-                    data-category="games arcade"
-                    data-name="rock paper scissors">
-
-                    <button class="fav-btn"
-                            data-id="rps">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        ✂️
-
-                    </div>
-
-                    <h3>
-
-                        Rock Paper Scissors
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Beat the computer in the classic battle.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-arcade">
-
-                            Arcade
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Medium
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        ▶ Play
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- Snake -->
-
-                <a
-                    href="Snake-Game/"
-                    class="game-card"
-                    data-id="snake"
-                    data-category="games arcade"
-                    data-name="snake">
-
-                    <button class="fav-btn"
-                            data-id="snake">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🐍
-
-                    </div>
-
-                    <h3>
-
-                        Snake Game
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Eat food, grow longer and survive.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-arcade">
-
-                            Arcade
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Medium
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        ▶ Play
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- Memory Game -->
-
-                <a
-                    href="Memory-Game/"
-                    class="game-card"
-                    data-id="memory"
-                    data-category="games memory"
-                    data-name="memory">
-
-                    <button class="fav-btn"
-                            data-id="memory">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🧠
-
-                    </div>
-
-                    <h3>
-
-                        Memory Game
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Match all pairs using your memory.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-memory">
-
-                            Memory
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Easy
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        ▶ Play
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- Simon -->
-
-                <a
-                    href="Simon-Game/"
-                    class="game-card"
-                    data-id="simon"
-                    data-category="games memory"
-                    data-name="simon">
-
-                    <button class="fav-btn"
-                            data-id="simon">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🎵
-
-                    </div>
-
-                    <h3>
-
-                        Simon Game
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Repeat the sequence correctly.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-memory">
-
-                            Memory
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Hard
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        ▶ Play
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- Whack a Mole -->
-
-                <a
-                    href="Whack-a-Mole/"
-                    class="game-card"
-                    data-id="mole"
-                    data-category="games arcade"
-                    data-name="whack">
-
-                    <button class="fav-btn"
-                            data-id="mole">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🔨
-
-                    </div>
-
-                    <h3>
-
-                        Whack-a-Mole
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Hit every mole before it disappears.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-arcade">
-
-                            Arcade
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Hard
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        ▶ Play
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- 2048 -->
-
-                <a
-                    href="2048/"
-                    class="game-card"
-                    data-id="2048"
-                    data-category="games logic"
-                    data-name="2048">
-
-                    <button class="fav-btn"
-                            data-id="2048">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🔢
-
-                    </div>
-
-                    <h3>
-
-                        2048
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Merge tiles strategically to reach 2048.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-logic">
-
-                            Logic
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Hard
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        ▶ Play
-
-                    </span>
-
-                </a>
-
-            </div>
-
-        </section>
-
-                <!-- ========================================= -->
-        <!-- DEVELOPER LAB -->
-        <!-- ========================================= -->
-
-        <section id="developerLab">
-
-            <h2 class="section-title">
-
-                💻 Developer Lab
-
-            </h2>
-
-            <p class="section-sub">
-
-                Practice real frontend development with interactive coding challenges.
-
-            </p>
-
-            <div class="game-grid">
-
-                <!-- Bug Hunter -->
-
-                <a
-                    href="Developer-Lab/Bug-Hunter/index.html"
-                    class="game-card dev-card"
-                    data-id="bughunter"
-                    data-category="developer"
-                    data-name="bug hunter javascript debug">
-
-                    <button class="fav-btn"
-                            data-id="bughunter">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🐞
-
-                    </div>
-
-                    <h3>
-
-                        Bug Hunter
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Find JavaScript bugs before time runs out.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-debug">
-
-                            Debug
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Medium
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        🚀 Launch
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- Chaos Button -->
-
-                <a
-                    href="Developer-Lab/Chaos-Button/index.html"
-                    class="game-card dev-card"
-                    data-id="chaos"
-                    data-category="developer"
-                    data-name="chaos button random challenge">
-
-                    <button class="fav-btn"
-                            data-id="chaos">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        ☄️
-
-                    </div>
-
-                    <h3>
-
-                        Chaos Button
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Receive a random coding challenge instantly.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-generator">
-
-                            Challenge
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Random
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        🚀 Launch
-
-                    </span>
-
-                </a>
-
-
-
-                <!-- Commit Generator -->
-
-                <a
-                    href="Developer-Lab/Commit-Generator/index.html"
-                    class="game-card dev-card"
-                    data-id="commit"
-                    data-category="developer"
-                    data-name="git commit generator">
-
-                    <button class="fav-btn"
-                            data-id="commit">
-
-                        ♡
-
-                    </button>
-
-                    <div class="game-icon">
-
-                        🌱
-
-                    </div>
-
-                    <h3>
-
-                        Commit Generator
-
-                    </h3>
-
-                    <p class="game-desc">
-
-                        Generate clean Git commit messages instantly.
-
-                    </p>
-
-                    <div class="card-meta">
-
-                        <span class="game-tag tag-git">
-
-                            Git
-
-                        </span>
-
-                        <span class="game-tag tag-diff">
-
-                            Utility
-
-                        </span>
-
-                    </div>
-
-                    <span class="play-btn">
-
-                        🚀 Open
-
-                    </span>
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-
-
-
-        <!-- ========================================= -->
-        <!-- FOOTER -->
-        <!-- ========================================= -->
-
-        <footer class="hub-footer">
-
-            <h3>
-
-                CodeQuest Arena
-
-            </h3>
-
-            <p>
-
-                Designed & Developed by
-
-                <strong>
-
-                    Lavanya Agrawal
-
-                </strong>
-
-            </p>
-
-            <p>
-
-                JavaScript • HTML • CSS • Frontend Projects
-
-            </p>
-
-            <div class="footer-links">
-
-                <a
-                    href="https://github.com/lavanyaag23"
-                    target="_blank">
-
-                    GitHub
-
-                </a>
-
-                <a
-                    href="https://lavanyaagrawal.vercel.app"
-                    target="_blank">
-
-                    Portfolio
-
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/"
-                    target="_blank">
-
-                    LinkedIn
-
-                </a>
-
-            </div>
-
-            <small>
-
-                © 2026 CodeQuest Arena • All Rights Reserved
-
-            </small>
-
-        </footer>
-
-    </main>
-
-
-
-
-
-    <!-- Toast -->
-
-    <div
-        id="toast"
-        class="toast">
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- DEV LAB -->
+    <section class="dev-lab-section" aria-label="Developer lab">
+      <h2 class="section-title"><span class="stitle-icon">🧪</span> Developer Lab</h2>
+      <p class="section-sub">Coding-inspired challenges for developers.</p>
+      <div class="game-grid" id="devGrid">
+
+        <a class="game-card" href="Developer-Lab/Bug-Hunter/index.html" data-name="bug hunter debug" data-category="developer" data-id="bughunter">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🐞</div></div>
+          <div class="played-badge hidden" data-id="bughunter">✓</div>
+          <div class="card-body">
+            <h3>Bug Hunter</h3>
+            <span class="card-category">Arcade Debug</span>
+            <div class="card-meta"><span class="game-tag tag-debug">Debug</span></div>
+            <div class="card-actions"><button class="play-btn dev">Play Now</button><button class="card-fav-btn" data-id="bughunter">♡</button></div>
+          </div>
+        </a>
+
+        <a class="game-card" href="Developer-Lab/Debug-The-Code/index.html" data-name="debug the code" data-category="developer" data-id="debugcode">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🐛</div></div>
+          <div class="played-badge hidden" data-id="debugcode">✓</div>
+          <div class="card-body">
+            <h3>Debug The Code</h3>
+            <span class="card-category">Code Analysis</span>
+            <div class="card-meta"><span class="game-tag tag-debug">Debug</span></div>
+            <div class="card-actions"><button class="play-btn dev">Play Now</button><button class="card-fav-btn" data-id="debugcode">♡</button></div>
+          </div>
+        </a>
+
+        <a class="game-card" href="Developer-Lab/Commit-Predictor/index.html" data-name="commit predictor git" data-category="developer" data-id="commitpredictor">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🔮</div></div>
+          <div class="played-badge hidden" data-id="commitpredictor">✓</div>
+          <div class="card-body">
+            <h3>Commit Predictor</h3>
+            <span class="card-category">Git Challenge</span>
+            <div class="card-meta"><span class="game-tag tag-git">Git</span></div>
+            <div class="card-actions"><button class="play-btn dev">Play Now</button><button class="card-fav-btn" data-id="commitpredictor">♡</button></div>
+          </div>
+        </a>
+
+        <a class="game-card" href="Developer-Lab/Chaos-Button/index.html" data-name="chaos button challenge" data-category="developer" data-id="chaos">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">☄️</div></div>
+          <div class="played-badge hidden" data-id="chaos">✓</div>
+          <div class="card-body">
+            <h3>Chaos Button</h3>
+            <span class="card-category">Dev Challenge</span>
+            <div class="card-meta"><span class="game-tag tag-reaction">Challenge</span></div>
+            <div class="card-actions"><button class="play-btn dev">Play Now</button><button class="card-fav-btn" data-id="chaos">♡</button></div>
+          </div>
+        </a>
+
+        <a class="game-card" href="Developer-Lab/Cosmic-Coder-Generator/index.html" data-name="cosmic coder generator" data-category="developer" data-id="cosmic">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🌌</div></div>
+          <div class="played-badge hidden" data-id="cosmic">✓</div>
+          <div class="card-body">
+            <h3>Cosmic Coder</h3>
+            <span class="card-category">Generator</span>
+            <div class="card-meta"><span class="game-tag tag-generator">Generator</span></div>
+            <div class="card-actions"><button class="play-btn dev">Play Now</button><button class="card-fav-btn" data-id="cosmic">♡</button></div>
+          </div>
+        </a>
+
+        <a class="game-card" href="Developer-Lab/Developer-Destiny/index.html" data-name="developer destiny generator" data-category="developer" data-id="destiny">
+          <div class="card-sweep"></div>
+          <div class="card-img"><div class="game-icon">🔥</div></div>
+          <div class="played-badge hidden" data-id="destiny">✓</div>
+          <div class="card-body">
+            <h3>Developer Destiny</h3>
+            <span class="card-category">Generator</span>
+            <div class="card-meta"><span class="game-tag tag-generator">Generator</span></div>
+            <div class="card-actions"><button class="play-btn dev">Play Now</button><button class="card-fav-btn" data-id="destiny">♡</button></div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="achieve-section" aria-label="Achievements">
+      <h2 class="section-title"><span class="stitle-icon">🏆</span> Achievements <span class="achieve-progress" id="achieveProgress"></span></h2>
+      <div class="achieve-grid" id="achievementContainer"></div>
+    </section>
+
+    <!-- BOTTOM 3 PANELS -->
+    <div class="bottom-panels">
+
+      <!-- Recently Played -->
+      <div class="panel" id="recentPanel">
+        <div class="panel-hdr">
+          <div class="panel-hdr-left"><span>🕒</span> Recently Played</div>
+          <button class="view-all-btn" id="clearRecent2">Clear</button>
+        </div>
+        <div id="recentPanelList"><p class="panel-empty">Play games to see history!</p></div>
+      </div>
+
+      <!-- Achievements panel -->
+      <div class="panel">
+        <div class="panel-hdr">
+          <div class="panel-hdr-left"><span>🏆</span> Achievements</div>
+          <button class="view-all-btn">View All</button>
+        </div>
+        <div id="achievePanelList"><p class="panel-empty">Unlock achievements to see them here!</p></div>
+      </div>
+
+      <!-- Daily Challenge -->
+      <div class="panel" id="dailyPanel">
+        <div class="panel-hdr">
+          <div class="panel-hdr-left"><span>🔥</span> Daily Challenge</div>
+          <span class="panel-hdr-timer" id="dailyTimer"></span>
+        </div>
+        <div id="dailyChallengeContent"><p class="panel-empty">Loading challenge…</p></div>
+      </div>
 
     </div>
 
-
-
-
-
-    <!-- Achievement Popup -->
-
-    <div
-        id="achievementPopup"
-        class="achieve-popup hidden">
-
-        <div class="ap-icon">
-
-            🏆
-
-        </div>
-
-        <div>
-
-            <div class="ap-label">
-
-                Achievement Unlocked
-
-            </div>
-
-            <div
-                id="popupTitle"
-                class="ap-name">
-
-            </div>
-
-            <div
-                id="popupXP"
-                class="ap-xp">
-
-            </div>
-
-        </div>
-
+    <!-- AVATAR MODAL -->
+    <div class="modal-overlay hidden" id="avatarModal">
+      <div class="modal-box">
+        <div class="modal-header"><h3>Choose Avatar</h3><button class="modal-close" id="avatarModalClose">✕</button></div>
+        <div class="avatar-grid" id="avatarGrid"></div>
+        <p class="avatar-hint">Some avatars unlock at higher levels!</p>
+      </div>
     </div>
 
+    <!-- NAME MODAL -->
+    <div class="modal-overlay hidden" id="nameModal">
+      <div class="modal-box">
+        <div class="modal-header"><h3>Edit Player Name</h3><button class="modal-close" id="nameModalClose">✕</button></div>
+        <input type="text" id="nameInput" class="name-input" placeholder="Enter your name…" maxlength="20"/>
+        <button class="btn-primary" id="nameSave">Save Name</button>
+      </div>
+    </div>
 
+    <footer class="hub-footer">
+      <p>Built by <a href="https://github.com/lavanyaag23" target="_blank" rel="noopener">Lavanya Agrawal</a> · <a href="https://lavanyaagrawal.vercel.app" target="_blank" rel="noopener">Portfolio</a> · <span class="version-tag">CQA v2.0</span></p>
+    </footer>
 
+  </main>
 
-
-    <script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
-
 </html>
