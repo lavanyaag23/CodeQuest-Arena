@@ -1,331 +1,997 @@
-const STORAGE_KEY = 'chaosButton_v1';
+"use strict";
 
-const CHALLENGES = [
+/* =========================================================
+   CHAOS BUTTON
+   CodeQuest Arena
+   ========================================================= */
 
-  // ── DSA ──
-  { cat:'dsa', diff:'easy',   text:'Reverse a string in-place without using built-in reverse methods. No extra array allowed.' },
-  { cat:'dsa', diff:'easy',   text:'Check if a string is a palindrome. Handle spaces and punctuation — "A man a plan a canal Panama" should return true.' },
-  { cat:'dsa', diff:'easy',   text:'Find the maximum element in an array without using Math.max or sort.' },
-  { cat:'dsa', diff:'easy',   text:'Count the number of vowels in a string. Must be case-insensitive.' },
-  { cat:'dsa', diff:'medium', text:'Given an array of integers, find two numbers that add up to a target sum. Return their indices. O(n) required.' },
-  { cat:'dsa', diff:'medium', text:'Check if two strings are anagrams of each other. No sorting — use a frequency map.' },
-  { cat:'dsa', diff:'medium', text:'Flatten a deeply nested array without using Array.prototype.flat().' },
-  { cat:'dsa', diff:'medium', text:'Remove duplicates from an array in O(n) time. Return the result in original order.' },
-  { cat:'dsa', diff:'medium', text:'Implement a queue using only two stacks. Support enqueue and dequeue operations.' },
-  { cat:'dsa', diff:'medium', text:'Given a string, find the length of the longest substring without repeating characters.' },
-  { cat:'dsa', diff:'hard',   text:'Implement a binary search tree with insert, search, and in-order traversal methods from scratch.' },
-  { cat:'dsa', diff:'hard',   text:'Write a function to detect a cycle in a linked list using Floyd\'s Tortoise and Hare algorithm.' },
-  { cat:'dsa', diff:'hard',   text:'Given a matrix, rotate it 90 degrees clockwise in-place without allocating a new matrix.' },
-  { cat:'dsa', diff:'hard',   text:'Implement memoized Fibonacci. Then explain why plain recursion is O(2^n) and memoized is O(n).' },
-  { cat:'dsa', diff:'hard',   text:'Find the longest common subsequence of two strings. Return the length and the actual subsequence.' },
+const challenges = [
 
-  // ── FRONTEND ──
-  { cat:'frontend', diff:'easy',   text:'Build a countdown timer UI that starts at 60 seconds and goes to 0, then shows "Time\'s up!" — pure vanilla JS.' },
-  { cat:'frontend', diff:'easy',   text:'Create a CSS card that flips on hover to reveal its back face. No JavaScript allowed.' },
-  { cat:'frontend', diff:'easy',   text:'Build a character counter for a textarea that turns red when the user exceeds 280 characters.' },
-  { cat:'frontend', diff:'easy',   text:'Create a responsive navbar that collapses into a hamburger menu on mobile using only CSS (no JS).' },
-  { cat:'frontend', diff:'medium', text:'Build an infinite scroll list that fetches and appends items from a mock API as the user scrolls down.' },
-  { cat:'frontend', diff:'medium', text:'Implement a custom multi-select dropdown with keyboard navigation (up/down arrows, enter to select, escape to close).' },
-  { cat:'frontend', diff:'medium', text:'Build a debounced live-search filter over a list of 200+ items — debounce must be written from scratch.' },
-  { cat:'frontend', diff:'medium', text:'Create a drag-and-drop Kanban board with three columns (Todo, In Progress, Done) in vanilla JS.' },
-  { cat:'frontend', diff:'medium', text:'Build a reusable React Toast notification system that stacks messages, auto-dismisses after 3s, and supports success/error/info types.' },
-  { cat:'frontend', diff:'hard',   text:'Build a fully accessible modal dialog: trap focus inside, close on Escape, restore focus on close, ARIA attributes correct.' },
-  { cat:'frontend', diff:'hard',   text:'Create a virtualized list component that only renders visible rows in the viewport (like react-window) — vanilla JS.' },
-  { cat:'frontend', diff:'hard',   text:'Build a color picker component from scratch — no libraries, renders a hue-saturation square and lightness slider.' },
-  { cat:'frontend', diff:'hard',   text:'Implement undo/redo for a text editor using the Command pattern. Support at least 20 levels of history.' },
+  // DSA
+  {
+    category: "dsa",
+    difficulty: 1,
+    title: "Array Logic",
+    text: "Given an array of integers, find the second largest element without sorting the array."
+  },
 
-  // ── BACKEND ──
-  { cat:'backend', diff:'easy',   text:'Write a Node.js Express middleware that rate-limits requests to 100 per IP per minute using in-memory storage.' },
-  { cat:'backend', diff:'easy',   text:'Build a REST endpoint that accepts a list of integers and returns their mean, median, and mode.' },
-  { cat:'backend', diff:'easy',   text:'Write a function that deep-clones a JavaScript object without using JSON.parse/JSON.stringify or lodash.' },
-  { cat:'backend', diff:'medium', text:'Design and implement a simple in-memory caching layer (LRU cache) with a capacity of 100 and TTL expiry per key.' },
-  { cat:'backend', diff:'medium', text:'Write a JWT authentication middleware for Express that validates the token, extracts the user, and handles expiry gracefully.' },
-  { cat:'backend', diff:'medium', text:'Build a CSV parser from scratch that handles quoted fields, escaped commas, and multi-line values correctly.' },
-  { cat:'backend', diff:'medium', text:'Implement an event emitter class (like Node\'s EventEmitter) with on(), off(), emit(), and once() methods.' },
-  { cat:'backend', diff:'hard',   text:'Design a real-time notification system using WebSockets. Handle reconnection, missed messages, and user-specific channels.' },
-  { cat:'backend', diff:'hard',   text:'Write a connection pool for a PostgreSQL database from scratch — manage idle connections, acquire timeouts, and graceful shutdown.' },
-  { cat:'backend', diff:'hard',   text:'Implement a simple task queue with priorities, retries on failure, and a worker pool of N concurrent workers.' },
+  {
+    category: "dsa",
+    difficulty: 2,
+    title: "Two Sum",
+    text: "Solve the Two Sum problem using a HashMap and explain why the solution runs in O(n) time."
+  },
 
-  // ── DEBUG ──
-  { cat:'debug', diff:'easy',   text:'Your API always returns 401 Unauthorized even though the token looks valid. Walk through every step you would take to debug this.' },
-  { cat:'debug', diff:'easy',   text:'A webpage looks correct in Chrome but broken in Safari. List 5 specific things you would check first.' },
-  { cat:'debug', diff:'medium', text:'A React component re-renders 50+ times per second even when no state changes. How do you find the root cause and fix it?' },
-  { cat:'debug', diff:'medium', text:'Your Node.js server memory usage climbs 50MB every hour and never drops. Describe exactly how you would identify the leak.' },
-  { cat:'debug', diff:'medium', text:'Users report the app "sometimes doesn\'t save". The save function looks correct. What are five possible race-condition causes?' },
-  { cat:'debug', diff:'medium', text:'A SQL query takes 12 seconds on 1M rows. Explain every step of how you\'d diagnose and optimize it.' },
-  { cat:'debug', diff:'hard',   text:'A distributed system occasionally drops messages between services with no error logged. Trace every possible failure point.' },
-  { cat:'debug', diff:'hard',   text:'Your CI pipeline passes but production breaks on deploy. List 8 concrete causes and how you\'d narrow them down in 15 minutes.' },
+  {
+    category: "dsa",
+    difficulty: 3,
+    title: "Sliding Window",
+    text: "Find the length of the longest substring without repeating characters using the sliding window technique."
+  },
 
-  // ── SYSTEM DESIGN ──
-  { cat:'system', diff:'medium', text:'Design a URL shortener like bit.ly. Cover data model, hashing strategy, redirect flow, and how you\'d handle 10k requests/sec.' },
-  { cat:'system', diff:'medium', text:'Design a notification service that sends emails, SMS, and push notifications. How do you handle failures and retries?' },
-  { cat:'system', diff:'medium', text:'Design a rate limiter for an API used by 1 million users. Compare token bucket vs sliding window approaches.' },
-  { cat:'system', diff:'hard',   text:'Design Twitter\'s timeline feature. How do you serve the feed for a user with 50M followers in under 100ms?' },
-  { cat:'system', diff:'hard',   text:'Design a real-time collaborative code editor (like VS Code Live Share). How do you handle merge conflicts between simultaneous edits?' },
-  { cat:'system', diff:'hard',   text:'Design a distributed job scheduler that runs 100k cron jobs across a cluster with no single point of failure.' },
-  { cat:'system', diff:'hard',   text:'Design a global CDN for video streaming. Cover content replication, cache invalidation, and adaptive bitrate selection.' },
+  // Frontend
+  {
+    category: "frontend",
+    difficulty: 1,
+    title: "CSS Challenge",
+    text: "Create a responsive card layout using CSS Grid that automatically changes from four columns to one column on mobile."
+  },
 
-  // ── GIT / DEVOPS ──
-  { cat:'git', diff:'easy',   text:'Explain the difference between git merge and git rebase. When would you use each? What are the risks of rebasing shared branches?' },
-  { cat:'git', diff:'easy',   text:'You accidentally committed secrets to a public repo 3 commits ago. Walk through every step to fully remove them from history.' },
-  { cat:'git', diff:'medium', text:'A git bisect session finds the commit that introduced a bug, but that commit changes 400 files. What\'s your next move?' },
-  { cat:'git', diff:'medium', text:'Write a GitHub Actions workflow that lints, tests, builds, and deploys a Node.js app to a server only on pushes to main.' },
-  { cat:'git', diff:'medium', text:'Your team has 20 feature branches all 3 weeks behind main. Design a branching strategy and migration plan to fix this.' },
-  { cat:'git', diff:'hard',   text:'Design a CI/CD pipeline for a monorepo with 15 packages. Only rebuild and deploy the packages that were actually changed.' },
-  { cat:'git', diff:'hard',   text:'Write a pre-commit git hook that runs ESLint, Prettier, and blocks the commit if any staged file has a TODO comment.' },
+  {
+    category: "frontend",
+    difficulty: 2,
+    title: "DOM Challenge",
+    text: "Build a JavaScript search box that filters a list of cards instantly as the user types."
+  },
+
+  {
+    category: "frontend",
+    difficulty: 3,
+    title: "Performance",
+    text: "Explain three ways you would improve the performance of a large JavaScript application containing hundreds of DOM elements."
+  },
+
+  // Backend
+  {
+    category: "backend",
+    difficulty: 1,
+    title: "API Basics",
+    text: "Explain the difference between GET, POST, PUT and DELETE HTTP methods."
+  },
+
+  {
+    category: "backend",
+    difficulty: 2,
+    title: "REST API",
+    text: "Design REST endpoints for a simple task-management application."
+  },
+
+  {
+    category: "backend",
+    difficulty: 3,
+    title: "Authentication",
+    text: "Explain how JWT-based authentication works from login to accessing a protected API route."
+  },
+
+  // Debug
+  {
+    category: "debug",
+    difficulty: 1,
+    title: "Find the Bug",
+    text: "A button click handler is not working. Inspect the event listener logic and identify the most likely causes."
+  },
+
+  {
+    category: "debug",
+    difficulty: 2,
+    title: "Async Debugging",
+    text: "A fetch request sometimes returns undefined data. Explain how you would debug the asynchronous JavaScript flow."
+  },
+
+  {
+    category: "debug",
+    difficulty: 3,
+    title: "Race Condition",
+    text: "Two asynchronous API requests update the same UI element. Explain how a race condition could occur and how you would prevent it."
+  },
+
+  // System
+  {
+    category: "system",
+    difficulty: 2,
+    title: "URL Shortener",
+    text: "Design the basic architecture of a URL-shortening service that can handle millions of requests."
+  },
+
+  {
+    category: "system",
+    difficulty: 3,
+    title: "Scalability",
+    text: "Explain how load balancing and caching can improve the scalability of a web application."
+  },
+
+  // Git
+  {
+    category: "git",
+    difficulty: 1,
+    title: "Git Recovery",
+    text: "You accidentally deleted a local commit. Explain how git reflog can help you recover it."
+  },
+
+  {
+    category: "git",
+    difficulty: 2,
+    title: "Merge Conflict",
+    text: "Explain the correct steps to resolve a Git merge conflict and safely commit the resolved files."
+  },
+
+  {
+    category: "git",
+    difficulty: 3,
+    title: "Git Strategy",
+    text: "Design a Git branching strategy for a team of developers working on a production web application."
+  }
 ];
 
-const DIFF_CONFIG = {
-  easy:   { dots: 1, label: 'Easy', cls: 'easy' },
-  medium: { dots: 2, label: 'Medium', cls: 'med' },
-  hard:   { dots: 3, label: 'Hard', cls: 'hard' }
-};
 
-const CAT_LABELS = {
-  dsa:'dsa', frontend:'frontend', backend:'backend',
-  debug:'debug', system:'system', git:'git'
-};
+/* =========================================================
+   STATE
+   ========================================================= */
 
-// DOM
-const survivedStat = document.getElementById('survivedStat');
-const skippedStat  = document.getElementById('skippedStat');
-const streakStat   = document.getElementById('streakStat');
-const filterBtns   = document.querySelectorAll('.filter-btn');
-const challengeCard = document.getElementById('challengeCard');
-const catBadge     = document.getElementById('catBadge');
-const d1 = document.getElementById('d1');
-const d2 = document.getElementById('d2');
-const d3 = document.getElementById('d3');
-const diffLabel    = document.getElementById('diffLabel');
-const challengeText = document.getElementById('challengeText');
-const timerDisplay = document.getElementById('timerDisplay');
-const timerCount   = document.getElementById('timerCount');
-const copyBtn      = document.getElementById('copyBtn');
-const timerToggleBtn = document.getElementById('timerToggleBtn');
-const idleHint     = document.getElementById('idleHint');
-const chaosBtn     = document.getElementById('chaosBtn');
-const outcomeRow   = document.getElementById('outcomeRow');
-const surviveBtn   = document.getElementById('surviveBtn');
-const skipBtn      = document.getElementById('skipBtn');
-const historySection = document.getElementById('historySection');
-const historyList  = document.getElementById('historyList');
+const STORAGE_KEY = "codequest-chaos-stats";
 
-let state = loadState();
-let currentFilter = 'all';
+let currentCategory = "all";
 let currentChallenge = null;
 let timerInterval = null;
-let timerSeconds = 0;
-let timerRunning = false;
-let audioCtx = null;
+let timerValue = 30;
 
-renderStats();
+let stats = {
+  completed: 0,
+  skipped: 0,
+  currentStreak: 0,
+  bestStreak: 0,
+  history: []
+};
 
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.cat;
-  });
-});
 
-chaosBtn.addEventListener('click', launchChaos);
-surviveBtn.addEventListener('click', () => recordOutcome('survived'));
-skipBtn.addEventListener('click', () => recordOutcome('skipped'));
-copyBtn.addEventListener('click', copyChallenge);
-timerToggleBtn.addEventListener('click', toggleTimer);
+/* =========================================================
+   DOM
+   ========================================================= */
 
-function loadState() {
+const chaosBtn = document.getElementById("chaosBtn");
+
+const challengeCard = document.getElementById("challengeCard");
+const challengeText = document.getElementById("challengeText");
+
+const catBadge = document.getElementById("catBadge");
+
+const d1 = document.getElementById("d1");
+const d2 = document.getElementById("d2");
+const d3 = document.getElementById("d3");
+
+const diffLabel = document.getElementById("diffLabel");
+
+const outcomeRow = document.getElementById("outcomeRow");
+
+const surviveBtn = document.getElementById("surviveBtn");
+const retryBtn = document.getElementById("retryBtn");
+const skipBtn = document.getElementById("skipBtn");
+
+const idleHint = document.getElementById("idleHint");
+
+const survivedStat = document.getElementById("survivedStat");
+const skippedStat = document.getElementById("skippedStat");
+const streakStat = document.getElementById("streakStat");
+
+const filterRow = document.getElementById("filterRow");
+
+const copyBtn = document.getElementById("copyBtn");
+
+const timerToggleBtn = document.getElementById("timerToggleBtn");
+const timerDisplay = document.getElementById("timerDisplay");
+const timerCount = document.getElementById("timerCount");
+
+const historySection = document.getElementById("historySection");
+const historyList = document.getElementById("historyList");
+
+
+/* =========================================================
+   LOAD SAVED DATA
+   ========================================================= */
+
+function loadStats() {
+
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return { survived: 0, skipped: 0, streak: 0, bestStreak: 0, history: [] };
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (!saved) return;
+
+    const parsed = JSON.parse(saved);
+
+    stats = {
+      ...stats,
+      ...parsed
+    };
+
+  } catch (error) {
+
+    console.warn("Could not load Chaos Button data.", error);
+
+  }
+
 }
 
-function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+/* =========================================================
+   SAVE DATA
+   ========================================================= */
+
+function saveStats() {
+
+  try {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(stats)
+    );
+
+  } catch (error) {
+
+    console.warn("Could not save Chaos Button data.", error);
+
+  }
+
 }
 
-function launchChaos() {
-  // pick challenge
-  const pool = currentFilter === 'all'
-    ? CHALLENGES
-    : CHALLENGES.filter(c => c.cat === currentFilter);
 
-  if (!pool.length) return;
-  const ch = pool[Math.floor(Math.random() * pool.length)];
-  currentChallenge = ch;
+/* =========================================================
+   UPDATE STATS
+   ========================================================= */
 
-  // render
-  catBadge.textContent = CAT_LABELS[ch.cat];
-  catBadge.className = `cat-badge cat-${ch.cat}`;
+function updateStats() {
 
-  const dc = DIFF_CONFIG[ch.diff];
-  [d1, d2, d3].forEach((dot, i) => {
-    dot.className = `diff-dot${i < dc.dots ? ` lit-${dc.cls}` : ''}`;
+  survivedStat.textContent = stats.completed;
+  skippedStat.textContent = stats.skipped;
+  streakStat.textContent = stats.bestStreak;
+
+}
+
+
+/* =========================================================
+   CATEGORY NAME
+   ========================================================= */
+
+function categoryName(category) {
+
+  const names = {
+    dsa: "DSA",
+    frontend: "Frontend",
+    backend: "Backend",
+    debug: "Debug",
+    system: "System",
+    git: "Git"
+  };
+
+  return names[category] || category;
+
+}
+
+
+/* =========================================================
+   DIFFICULTY
+   ========================================================= */
+
+function updateDifficulty(level) {
+
+  const dots = [d1, d2, d3];
+
+  dots.forEach((dot, index) => {
+
+    dot.classList.toggle(
+      "active",
+      index < level
+    );
+
   });
-  diffLabel.textContent = dc.label;
-  diffLabel.className = `diff-label ${dc.cls}`;
 
-  challengeText.textContent = ch.text;
+  const labels = {
+    1: "Easy",
+    2: "Medium",
+    3: "Hard"
+  };
 
-  // stop timer
-  clearTimer();
-  timerDisplay.classList.add('hidden');
-  timerToggleBtn.title = 'Start timer';
+  diffLabel.textContent =
+    labels[level] || "Unknown";
 
-  // quake animation
-  challengeCard.classList.remove('quake');
-  void challengeCard.offsetWidth;
-  challengeCard.classList.add('hidden');
-  void challengeCard.offsetWidth;
-  challengeCard.classList.remove('hidden');
-  challengeCard.classList.add('quake');
-
-  idleHint.classList.add('hidden');
-  outcomeRow.classList.remove('hidden');
-  challengeCard.classList.remove('hidden');
-
-  soundChaos();
 }
 
-function recordOutcome(type) {
-  clearTimer();
-  timerDisplay.classList.add('hidden');
 
-  if (type === 'survived') {
-    state.survived++;
-    state.streak++;
-    state.bestStreak = Math.max(state.bestStreak, state.streak);
-    soundSurvive();
-  } else {
-    state.skipped++;
-    state.streak = 0;
-    soundSkip();
+/* =========================================================
+   FILTER CHALLENGES
+   ========================================================= */
+
+function getAvailableChallenges() {
+
+  if (currentCategory === "all") {
+
+    return challenges;
+
   }
 
-  if (currentChallenge) {
-    state.history.unshift({
-      text: currentChallenge.text,
-      cat: currentChallenge.cat,
-      diff: currentChallenge.diff,
-      outcome: type
-    });
-    state.history = state.history.slice(0, 5);
+  return challenges.filter(
+    challenge =>
+      challenge.category === currentCategory
+  );
+
+}
+
+
+/* =========================================================
+   RANDOM CHALLENGE
+   ========================================================= */
+
+function getRandomChallenge() {
+
+  const available = getAvailableChallenges();
+
+  if (!available.length) {
+
+    return null;
+
   }
 
-  saveState();
-  renderStats();
-  renderHistory();
-  outcomeRow.classList.add('hidden');
-}
+  /*
+   * Prevent the exact same challenge from appearing
+   * twice consecutively when possible.
+   */
 
-function renderStats() {
-  survivedStat.textContent = state.survived;
-  skippedStat.textContent  = state.skipped;
-  streakStat.textContent   = state.bestStreak;
-}
+  let candidates = available;
 
-function renderHistory() {
-  if (!state.history.length) return;
-  historySection.classList.remove('hidden');
-  historyList.innerHTML = '';
-  state.history.forEach(item => {
-    const el = document.createElement('div');
-    el.className = 'history-item';
-    el.innerHTML = `
-      <span class="history-badge cat-${item.cat}">${item.cat}</span>
-      <span class="history-text">${item.text}</span>
-      <span class="history-outcome">${item.outcome === 'survived' ? '✅' : '💀'}</span>
-    `;
-    historyList.appendChild(el);
-  });
-}
+  if (available.length > 1 && currentChallenge) {
 
-function toggleTimer() {
-  if (timerRunning) {
-    clearTimer();
-    timerDisplay.classList.add('hidden');
-    timerToggleBtn.title = 'Start timer';
-    return;
+    candidates = available.filter(
+      challenge =>
+        challenge.text !== currentChallenge.text
+    );
+
   }
 
-  // pick a time based on difficulty
-  const timeMap = { easy: 300, medium: 600, hard: 1800 };
-  timerSeconds = currentChallenge ? timeMap[currentChallenge.diff] : 300;
-  timerRunning = true;
-  timerDisplay.classList.remove('hidden');
-  timerToggleBtn.title = 'Stop timer';
-  renderTimerDisplay();
+  const randomIndex =
+    Math.floor(Math.random() * candidates.length);
+
+  return candidates[randomIndex];
+
+}
+
+
+/* =========================================================
+   DISPLAY CHALLENGE
+   ========================================================= */
+
+function displayChallenge(challenge) {
+
+  if (!challenge) return;
+
+  currentChallenge = challenge;
+
+  challengeText.textContent =
+    challenge.text;
+
+  catBadge.textContent =
+    categoryName(challenge.category);
+
+  updateDifficulty(
+    challenge.difficulty
+  );
+
+  challengeCard.classList.remove("hidden");
+
+  idleHint.classList.add("hidden");
+
+  outcomeRow.classList.remove("hidden");
+
+  chaosBtn.classList.add("active");
+
+  stopTimer();
+
+  timerDisplay.classList.add("hidden");
+
+  timerValue = 30;
+
+  timerCount.textContent = timerValue;
+
+}
+
+
+/* =========================================================
+   UNLEASH CHAOS
+   ========================================================= */
+
+function unleashChaos() {
+
+  const challenge =
+    getRandomChallenge();
+
+  if (!challenge) return;
+
+  displayChallenge(challenge);
+
+  addHistory(
+    challenge,
+    "generated"
+  );
+
+  chaosBtn.classList.add("pulse");
+
+  setTimeout(() => {
+
+    chaosBtn.classList.remove("pulse");
+
+  }, 500);
+
+}
+
+
+/* =========================================================
+   SURVIVE
+   ========================================================= */
+
+function surviveChallenge() {
+
+  if (!currentChallenge) return;
+
+  stats.completed++;
+
+  stats.currentStreak++;
+
+  if (
+    stats.currentStreak >
+    stats.bestStreak
+  ) {
+
+    stats.bestStreak =
+      stats.currentStreak;
+
+  }
+
+  addHistory(
+    currentChallenge,
+    "completed"
+  );
+
+  saveStats();
+
+  updateStats();
+
+  showFeedback(
+    "🔥 Challenge survived! +XP"
+  );
+
+  generateNextChallenge();
+
+}
+
+
+/* =========================================================
+   SKIP
+   ========================================================= */
+
+function skipChallenge() {
+
+  if (!currentChallenge) return;
+
+  stats.skipped++;
+
+  stats.currentStreak = 0;
+
+  addHistory(
+    currentChallenge,
+    "skipped"
+  );
+
+  saveStats();
+
+  updateStats();
+
+  showFeedback(
+    "💀 Challenge skipped. Streak reset."
+  );
+
+  generateNextChallenge();
+
+}
+
+
+/* =========================================================
+   TRY AGAIN
+   ========================================================= */
+
+function retryChallenge() {
+
+  const challenge =
+    getRandomChallenge();
+
+  if (!challenge) return;
+
+  displayChallenge(challenge);
+
+  addHistory(
+    challenge,
+    "retry"
+  );
+
+}
+
+
+/* =========================================================
+   NEXT CHALLENGE
+   ========================================================= */
+
+function generateNextChallenge() {
+
+  const challenge =
+    getRandomChallenge();
+
+  if (!challenge) return;
+
+  displayChallenge(challenge);
+
+}
+
+
+/* =========================================================
+   COPY
+   ========================================================= */
+
+async function copyChallenge() {
+
+  if (!currentChallenge) return;
+
+  const text =
+    `${categoryName(currentChallenge.category)} — ${currentChallenge.text}`;
+
+  try {
+
+    await navigator.clipboard.writeText(text);
+
+    showFeedback(
+      "📋 Challenge copied!"
+    );
+
+  } catch (error) {
+
+    /*
+     * Fallback for browsers where
+     * Clipboard API isn't available.
+     */
+
+    const textarea =
+      document.createElement("textarea");
+
+    textarea.value = text;
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    document.execCommand("copy");
+
+    textarea.remove();
+
+    showFeedback(
+      "📋 Challenge copied!"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+
+function startTimer() {
+
+  if (!currentChallenge) return;
+
+  if (timerInterval) return;
+
+  timerDisplay.classList.remove(
+    "hidden"
+  );
+
+  timerToggleBtn.textContent = "⏸";
 
   timerInterval = setInterval(() => {
-    timerSeconds--;
-    renderTimerDisplay();
-    if (timerSeconds <= 0) {
-      clearTimer();
-      timerCount.textContent = 'Done!';
-      timerDisplay.classList.remove('urgent');
-      soundTimeout();
+
+    timerValue--;
+
+    timerCount.textContent =
+      timerValue;
+
+    if (timerValue <= 0) {
+
+      stopTimer();
+
+      showFeedback(
+        "⏰ Time's up!"
+      );
+
+      timerCount.textContent = "0";
+
     }
+
   }, 1000);
+
 }
 
-function clearTimer() {
-  clearInterval(timerInterval);
-  timerRunning = false;
-}
 
-function renderTimerDisplay() {
-  const m = Math.floor(timerSeconds / 60);
-  const s = timerSeconds % 60;
-  timerCount.textContent = m > 0
-    ? `${m}:${String(s).padStart(2, '0')}`
-    : `${timerSeconds}s`;
-  timerDisplay.classList.toggle('urgent', timerSeconds <= 30);
-}
+function stopTimer() {
 
-function copyChallenge() {
-  if (!currentChallenge) return;
-  navigator.clipboard.writeText(currentChallenge.text).then(() => showToast('Copied! 📋'));
-}
+  if (timerInterval) {
 
-function showToast(msg) {
-  let toast = document.querySelector('.copy-toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.className = 'copy-toast';
-    document.body.appendChild(toast);
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
   }
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
+
+  timerToggleBtn.textContent = "⏱";
+
 }
 
-// ── Audio ──
-function getAudioCtx() {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  return audioCtx;
+
+function toggleTimer() {
+
+  if (!currentChallenge) return;
+
+  if (timerInterval) {
+
+    stopTimer();
+
+    return;
+
+  }
+
+  if (timerValue <= 0) {
+
+    timerValue = 30;
+
+    timerCount.textContent =
+      timerValue;
+
+  }
+
+  startTimer();
+
 }
 
-function playTone(freqs, dur = 0.1, type = 'sine') {
-  try {
-    const ctx = getAudioCtx();
-    freqs.forEach((freq, i) => {
-      const osc = ctx.createOscillator(), gain = ctx.createGain();
-      osc.type = type; osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.07, ctx.currentTime + i * dur);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (i + 1) * dur);
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(ctx.currentTime + i * dur);
-      osc.stop(ctx.currentTime + (i + 1) * dur);
-    });
-  } catch {}
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+function addHistory(
+  challenge,
+  status
+) {
+
+  const item = {
+
+    category: challenge.category,
+
+    difficulty:
+      challenge.difficulty,
+
+    text:
+      challenge.text,
+
+    status,
+
+    time:
+      Date.now()
+
+  };
+
+  stats.history.unshift(item);
+
+  /*
+   * Keep the last 8 entries.
+   */
+
+  stats.history =
+    stats.history.slice(0, 8);
+
+  renderHistory();
+
+  saveStats();
+
 }
 
-function soundChaos()   { playTone([110, 220, 440, 880], 0.07, 'sawtooth'); }
-function soundSurvive() { playTone([523, 659, 784, 1047], 0.1); }
-function soundSkip()    { playTone([300, 220, 160], 0.1); }
-function soundTimeout() { playTone([880, 440, 220], 0.12); }
 
-// render existing history on load
-renderHistory();
+function renderHistory() {
+
+  if (!stats.history.length) {
+
+    historySection.classList.add(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+  historySection.classList.remove(
+    "hidden"
+  );
+
+  historyList.innerHTML = "";
+
+  stats.history.forEach(item => {
+
+    const element =
+      document.createElement("div");
+
+    element.className =
+      "history-item";
+
+    const statusIcon = {
+
+      completed: "✅",
+
+      skipped: "💀",
+
+      retry: "🔄",
+
+      generated: "☄️"
+
+    }[item.status] || "☄️";
+
+    element.innerHTML = `
+
+      <span class="history-icon">
+        ${statusIcon}
+      </span>
+
+      <div class="history-content">
+
+        <strong>
+          ${escapeHTML(
+            categoryName(item.category)
+          )}
+        </strong>
+
+        <span>
+          ${escapeHTML(item.text)}
+        </span>
+
+      </div>
+
+    `;
+
+    historyList.appendChild(
+      element
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(value) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent = value;
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+   ========================================================= */
+
+function showFeedback(message) {
+
+  let feedback =
+    document.getElementById(
+      "chaosFeedback"
+    );
+
+  if (!feedback) {
+
+    feedback =
+      document.createElement("div");
+
+    feedback.id =
+      "chaosFeedback";
+
+    feedback.className =
+      "chaos-feedback";
+
+    document.body.appendChild(
+      feedback
+    );
+
+  }
+
+  feedback.textContent =
+    message;
+
+  feedback.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    feedback.hideTimeout
+  );
+
+  feedback.hideTimeout =
+    setTimeout(() => {
+
+      feedback.classList.remove(
+        "show"
+      );
+
+    }, 2200);
+
+}
+
+
+/* =========================================================
+   FILTER BUTTONS
+   ========================================================= */
+
+filterRow.addEventListener(
+  "click",
+  event => {
+
+    const button =
+      event.target.closest(
+        ".filter-btn"
+      );
+
+    if (!button) return;
+
+    document
+      .querySelectorAll(".filter-btn")
+      .forEach(btn => {
+
+        btn.classList.remove(
+          "active"
+        );
+
+      });
+
+    button.classList.add(
+      "active"
+    );
+
+    currentCategory =
+      button.dataset.cat;
+
+    /*
+     * If a challenge is currently
+     * displayed, generate one
+     * matching the new category.
+     */
+
+    if (!challengeCard.classList.contains("hidden")) {
+
+      unleashChaos();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   EVENT LISTENERS
+   ========================================================= */
+
+chaosBtn.addEventListener(
+  "click",
+  unleashChaos
+);
+
+surviveBtn.addEventListener(
+  "click",
+  surviveChallenge
+);
+
+retryBtn.addEventListener(
+  "click",
+  retryChallenge
+);
+
+skipBtn.addEventListener(
+  "click",
+  skipChallenge
+);
+
+copyBtn.addEventListener(
+  "click",
+  copyChallenge
+);
+
+timerToggleBtn.addEventListener(
+  "click",
+  toggleTimer
+);
+
+
+/* =========================================================
+   KEYBOARD SUPPORT
+   ========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    /*
+     * Space or Enter while not typing
+     * triggers Chaos.
+     */
+
+    const tag =
+      document.activeElement?.tagName;
+
+    const isTyping =
+      tag === "INPUT" ||
+      tag === "TEXTAREA";
+
+    if (isTyping) return;
+
+    if (
+      event.code === "Space" ||
+      event.code === "Enter"
+    ) {
+
+      event.preventDefault();
+
+      unleashChaos();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
+
+function initialize() {
+
+  loadStats();
+
+  updateStats();
+
+  renderHistory();
+
+  challengeCard.classList.add(
+    "hidden"
+  );
+
+  outcomeRow.classList.add(
+    "hidden"
+  );
+
+  idleHint.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+initialize();

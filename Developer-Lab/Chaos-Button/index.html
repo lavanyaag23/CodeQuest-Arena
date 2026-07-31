@@ -1,114 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chaos Button</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chaos Button - Random coding challenges for developers">
+  <title>Chaos Button · CodeQuest Arena</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="app">
-  <div class="panel">
+  <main class="app">
 
-    <header class="hero">
+    <section class="panel">
 
-    <div class="hero-badge">
-        <span>☄️ Developer Challenge</span>
-    </div>
+      <!-- HERO -->
+      <header class="hero">
 
-    <h1>
-        Chaos
-        <span>Button</span>
-    </h1>
+        <div class="hero-badge">
+          <span>☄️ Developer Challenge</span>
+        </div>
 
-    <p class="hero-subtitle">
-        Click once and receive a random coding challenge.
-        Improve DSA, Frontend, Git, Debugging and System Design through daily chaos.
-    </p>
+        <h1>
+          Chaos
+          <span>Button</span>
+        </h1>
 
-    <div class="hero-stats">
+        <p class="hero-subtitle">
+          Click once and receive a random coding challenge.
+          Improve DSA, Frontend, Git, Debugging and System Design
+          through daily chaos.
+        </p>
 
-        <div class="stat-card">
+        <!-- STATS -->
+        <div class="hero-stats">
+
+          <div class="stat-card">
             <div class="stat-number" id="survivedStat">0</div>
-            <div class="stat-text">Challenges Completed</div>
-        </div>
+            <div class="stat-text">
+              Challenges Completed
+            </div>
+          </div>
 
-        <div class="stat-card">
+          <div class="stat-card">
             <div class="stat-number" id="skippedStat">0</div>
-            <div class="stat-text">Skipped</div>
-        </div>
+            <div class="stat-text">
+              Skipped
+            </div>
+          </div>
 
-        <div class="stat-card">
+          <div class="stat-card">
             <div class="stat-number" id="streakStat">0</div>
-            <div class="stat-text">Best Streak</div>
+            <div class="stat-text">
+              Best Streak
+            </div>
+          </div>
+
         </div>
 
-    </div>
+      </header>
 
-</header>
+      <!-- CATEGORY FILTER -->
+      <section class="filters" aria-label="Challenge categories">
 
-    <!-- category filter -->
-    <div class="filter-row" id="filterRow">
-      <button class="filter-btn active" data-cat="all">All</button>
-      <button class="filter-btn" data-cat="dsa">DSA</button>
-      <button class="filter-btn" data-cat="frontend">Frontend</button>
-      <button class="filter-btn" data-cat="backend">Backend</button>
-      <button class="filter-btn" data-cat="debug">Debug</button>
-      <button class="filter-btn" data-cat="system">System</button>
-      <button class="filter-btn" data-cat="git">Git</button>
-    </div>
+        <div class="filter-row" id="filterRow">
 
-    <!-- challenge card -->
-    <div class="challenge-card hidden" id="challengeCard">
-      <div class="card-top">
-        <span class="cat-badge" id="catBadge">DSA</span>
-        <div class="diff-dots-row">
-          <span class="diff-dot" id="d1"></span>
-          <span class="diff-dot" id="d2"></span>
-          <span class="diff-dot" id="d3"></span>
-          <span class="diff-label" id="diffLabel">Easy</span>
+          <button
+            class="filter-btn active"
+            data-cat="all"
+            type="button"
+          >
+            All
+          </button>
+
+          <button
+            class="filter-btn"
+            data-cat="dsa"
+            type="button"
+          >
+            DSA
+          </button>
+
+          <button
+            class="filter-btn"
+            data-cat="frontend"
+            type="button"
+          >
+            Frontend
+          </button>
+
+          <button
+            class="filter-btn"
+            data-cat="backend"
+            type="button"
+          >
+            Backend
+          </button>
+
+          <button
+            class="filter-btn"
+            data-cat="debug"
+            type="button"
+          >
+            Debug
+          </button>
+
+          <button
+            class="filter-btn"
+            data-cat="system"
+            type="button"
+          >
+            System
+          </button>
+
+          <button
+            class="filter-btn"
+            data-cat="git"
+            type="button"
+          >
+            Git
+          </button>
+
         </div>
+
+      </section>
+
+      <!-- CHALLENGE CARD -->
+      <section
+        class="challenge-card hidden"
+        id="challengeCard"
+        aria-live="polite"
+      >
+
+        <div class="card-top">
+
+          <span
+            class="cat-badge"
+            id="catBadge"
+          >
+            DSA
+          </span>
+
+          <div class="difficulty">
+
+            <div class="diff-dots-row">
+
+              <span class="diff-dot" id="d1"></span>
+              <span class="diff-dot" id="d2"></span>
+              <span class="diff-dot" id="d3"></span>
+
+              <span
+                class="diff-label"
+                id="diffLabel"
+              >
+                Easy
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <p
+          class="challenge-text"
+          id="challengeText"
+        >
+          Your challenge will appear here.
+        </p>
+
+        <!-- CARD FOOTER -->
+        <div class="challenge-footer">
+
+          <span
+            class="timer-display hidden"
+            id="timerDisplay"
+          >
+            ⏱
+            <span id="timerCount">30</span>s
+          </span>
+
+          <div class="card-actions">
+
+            <button
+              class="icon-btn"
+              id="copyBtn"
+              type="button"
+              title="Copy challenge"
+              aria-label="Copy challenge"
+            >
+              📋
+            </button>
+
+            <button
+              class="icon-btn"
+              id="timerToggleBtn"
+              type="button"
+              title="Start timer"
+              aria-label="Start timer"
+            >
+              ⏱
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- IDLE MESSAGE -->
+      <div
+        class="idle-hint-box"
+        id="idleHint"
+      >
+
+        <p>
+          Hit the button below to receive your challenge.
+        </p>
+
+        <p class="hint-sub">
+          Survive it, skip it, or try again.
+        </p>
+
       </div>
-      <p class="challenge-text" id="challengeText">Loading…</p>
-      <div class="challenge-footer">
-        <span class="timer-display hidden" id="timerDisplay">⏱ <span id="timerCount">30</span>s</span>
-        <div class="card-actions">
-          <button class="icon-btn" id="copyBtn" title="Copy challenge">📋</button>
-          <button class="icon-btn" id="timerToggleBtn" title="Start timer">⏱</button>
-        </div>
+
+      <!-- CHAOS BUTTON -->
+      <button
+        class="chaos-btn"
+        id="chaosBtn"
+        type="button"
+      >
+
+        <span class="chaos-icon">
+          ☄️
+        </span>
+
+        <span class="chaos-label">
+          UNLEASH CHAOS
+        </span>
+
+      </button>
+
+      <!-- OUTCOME BUTTONS -->
+      <div
+        class="outcome-row hidden"
+        id="outcomeRow"
+      >
+
+        <button
+          class="outcome-btn survive"
+          id="surviveBtn"
+          type="button"
+        >
+          ✅ Survived
+        </button>
+
+        <button
+          class="outcome-btn retry"
+          id="retryBtn"
+          type="button"
+        >
+          🔄 Try Again
+        </button>
+
+        <button
+          class="outcome-btn skip"
+          id="skipBtn"
+          type="button"
+        >
+          💀 Too Scary
+        </button>
+
       </div>
-    </div>
 
-    <!-- idle hint -->
-    <div class="idle-hint-box" id="idleHint">
-      <p>Hit the button below to receive your challenge.</p>
-      <p class="hint-sub">Survive it, skip it, or try again.</p>
-    </div>
+      <!-- HISTORY -->
+      <section
+        class="history-section hidden"
+        id="historySection"
+      >
 
-    <!-- THE BUTTON -->
-    <button class="chaos-btn" id="chaosBtn">
-      <span class="chaos-icon">☄️</span>
-      <span class="chaos-label">UNLEASH CHAOS</span>
-    </button>
+        <p class="history-label">
+          Recent Chaos
+        </p>
 
-    <!-- survive / skip row -->
-    <div class="outcome-row hidden" id="outcomeRow">
-      <button class="outcome-btn survive" id="surviveBtn">✅ Survived</button>
-      <button class="outcome-btn skip" id="skipBtn">💀 Too Scary</button>
-    </div>
+        <div
+          class="history-list"
+          id="historyList"
+        ></div>
 
-    <!-- history -->
-    <div class="history-section hidden" id="historySection">
-      <p class="history-label">Recent Chaos</p>
-      <div class="history-list" id="historyList"></div>
-    </div>
+      </section>
 
-  </div>
-</div>
+      <!-- FOOTER -->
+      <footer class="chaos-footer">
 
-<script src="script.js"></script>
+        <span>
+          CodeQuest Arena
+        </span>
+
+        <span>•</span>
+
+        <span>
+          Random challenges. Real skills.
+        </span>
+
+      </footer>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+
 </body>
 </html>

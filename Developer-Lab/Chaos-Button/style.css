@@ -569,3 +569,169 @@ h1 {
   .chaos-label { font-size: 14px; }
   .challenge-text { font-size: 14px; }
 }
+
+/* =========================================================
+   CHAOS BUTTON - PLAYABILITY UI
+   ========================================================= */
+
+.outcome-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.outcome-btn {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 11px 18px;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .25s ease;
+  background: rgba(255,255,255,.06);
+}
+
+.outcome-btn:hover {
+  transform: translateY(-2px);
+}
+
+.outcome-btn.survive {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.outcome-btn.retry {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+}
+
+.outcome-btn.skip {
+  background: linear-gradient(135deg, #be123c, #e11d48);
+}
+
+.chaos-btn.pulse {
+  animation: chaosPulse .5s ease;
+}
+
+@keyframes chaosPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.history-section {
+  margin-top: 28px;
+}
+
+.history-label {
+  margin-bottom: 12px;
+  color: #aaa3c7;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  background: rgba(255,255,255,.035);
+}
+
+.history-icon {
+  font-size: 1.1rem;
+}
+
+.history-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.history-content strong {
+  color: #b78cff;
+  font-size: .78rem;
+}
+
+.history-content span {
+  color: #b5afc8;
+  font-size: .78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chaos-feedback {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 30px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+
+  padding: 12px 20px;
+  border: 1px solid rgba(167,139,250,.35);
+  border-radius: 999px;
+
+  background: rgba(20,14,38,.94);
+  color: #fff;
+
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.4),
+    0 0 30px rgba(139,92,246,.2);
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+.chaos-feedback.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+
+  .outcome-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .outcome-btn {
+    width: 100%;
+  }
+
+  .history-content span {
+    white-space: normal;
+  }
+
+}
