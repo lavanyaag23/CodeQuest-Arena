@@ -105,6 +105,7 @@
       <div class="pd-info">
         <div class="pd-name-row">
           <span class="pd-name" id="pdName">Guest Player</span>
+          <button class="edit-name-btn" id="editNameBtn" title="Edit name" onclick="event.stopPropagation()">✏️</button>
           <span class="pd-title-badge" id="pdTitle">NEWCOMER</span>
         </div>
         <div class="pd-level-xp">
@@ -127,6 +128,26 @@
       <div class="stat-card"><div class="stat-card-icon sci-cyan">&lt;/&gt;</div><div class="stat-text"><span class="stat-num" id="devCount">6</span><span class="stat-lbl">Dev Lab</span></div></div>
       <div class="stat-card"><div class="stat-card-icon sci-orange">⭐</div><div class="stat-text"><span class="stat-num" id="totalCount">13</span><span class="stat-lbl">Total</span></div></div>
       <div class="stat-card"><div class="stat-card-icon sci-green">🕒</div><div class="stat-text"><span class="stat-num" id="latestPlayed" style="font-size:.95rem">—</span><span class="stat-lbl">Latest Played</span></div></div>
+    </div>
+
+    <!-- COMPLETION BARS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px">
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--text2);margin-bottom:6px">
+          <span>🎮 Games</span><span id="gamesPct" style="font-family:var(--mono)">0/7</span>
+        </div>
+        <div style="height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden">
+          <div id="gamesFill" style="height:100%;border-radius:99px;background:linear-gradient(90deg,var(--purple),#8b5cf6);width:0%;transition:width .8s"></div>
+        </div>
+      </div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px">
+        <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--text2);margin-bottom:6px">
+          <span>🧪 Dev Lab</span><span id="devPct" style="font-family:var(--mono)">0/6</span>
+        </div>
+        <div style="height:6px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden">
+          <div id="devFill" style="height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green,#10b981),#60a5fa);width:0%;transition:width .8s"></div>
+        </div>
+      </div>
     </div>
 
     <!-- CONTINUE PLAYING -->
@@ -366,9 +387,20 @@
 
     <!-- ACHIEVEMENTS -->
     <section class="achieve-section" aria-label="Achievements">
-      <h2 class="section-title"><span class="stitle-icon">🏆</span> Achievements <span class="achieve-progress" id="achieveProgress"></span></h2>
+      <div class="section-title-row">
+        <h2 class="section-title"><span class="stitle-icon">🏆</span> Achievements <span class="achieve-progress" id="achieveProgress"></span></h2>
+        <div style="display:flex;gap:12px;align-items:center;font-size:.75rem;color:var(--text2)">
+          <span>🏅 <strong id="achieveCount">0</strong> unlocked</span>
+          <span>🎮 <strong id="gamesPlayedCount">0</strong> played</span>
+          <span>❤️ <strong id="favCount">0</strong> favs</span>
+          <span>✅ <strong id="completionPct">0%</strong> done</span>
+        </div>
+      </div>
       <div class="achieve-grid" id="achievementContainer"></div>
     </section>
+
+    <!-- LEADERBOARD ANCHOR -->
+    <div id="lbSection"></div>
 
     <!-- BOTTOM 3 PANELS -->
     <div class="bottom-panels">
