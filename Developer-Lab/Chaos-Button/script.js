@@ -1,997 +1,1039 @@
-"use strict";
-
 /* =========================================================
-   CHAOS BUTTON
-   CodeQuest Arena
-   ========================================================= */
+   CODEQUEST ARENA
+   CHAOS MODE
+   Interactive Developer Challenges
+========================================================= */
 
 const challenges = [
 
-  // DSA
+  /* ================= DSA ================= */
+
   {
     category: "dsa",
-    difficulty: 1,
-    title: "Array Logic",
-    text: "Given an array of integers, find the second largest element without sorting the array."
+    categoryName: "DSA",
+    difficulty: "Easy",
+    xp: 25,
+    title: "Find the Missing Number",
+    description:
+      "One number from 1 to 6 is missing. Find the missing number.",
+    type: "input",
+    data: {
+      numbers: [4, 1, 6, 2, 5],
+      answer: "3"
+    }
   },
 
   {
     category: "dsa",
-    difficulty: 2,
+    categoryName: "DSA",
+    difficulty: "Easy",
+    xp: 25,
+    title: "Reverse the String",
+    description:
+      "Reverse the following string and enter your answer.",
+    type: "input",
+    data: {
+      value: "CODEQUEST",
+      answer: "TSEUQEDOC"
+    }
+  },
+
+  {
+    category: "dsa",
+    categoryName: "DSA",
+    difficulty: "Medium",
+    xp: 50,
     title: "Two Sum",
-    text: "Solve the Two Sum problem using a HashMap and explain why the solution runs in O(n) time."
+    description:
+      "Which two numbers add up to the target value 9?",
+    type: "options",
+    data: {
+      options: [
+        "[2, 7]",
+        "[3, 5]",
+        "[1, 6]",
+        "[4, 4]"
+      ],
+      answer: 0
+    }
   },
 
   {
     category: "dsa",
-    difficulty: 3,
-    title: "Sliding Window",
-    text: "Find the length of the longest substring without repeating characters using the sliding window technique."
+    categoryName: "DSA",
+    difficulty: "Medium",
+    xp: 50,
+    title: "Array Complexity",
+    description:
+      "What is the time complexity of binary search on a sorted array?",
+    type: "options",
+    data: {
+      options: [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      answer: 1
+    }
   },
 
-  // Frontend
+  /* ================= FRONTEND ================= */
+
   {
     category: "frontend",
-    difficulty: 1,
-    title: "CSS Challenge",
-    text: "Create a responsive card layout using CSS Grid that automatically changes from four columns to one column on mobile."
+    categoryName: "Frontend",
+    difficulty: "Easy",
+    xp: 25,
+    title: "CSS Selector",
+    description:
+      "Which CSS property creates rounded corners?",
+    type: "options",
+    data: {
+      options: [
+        "corner-radius",
+        "border-radius",
+        "radius",
+        "round-border"
+      ],
+      answer: 1
+    }
   },
 
   {
     category: "frontend",
-    difficulty: 2,
-    title: "DOM Challenge",
-    text: "Build a JavaScript search box that filters a list of cards instantly as the user types."
+    categoryName: "Frontend",
+    difficulty: "Medium",
+    xp: 50,
+    title: "Flexbox Alignment",
+    description:
+      "Which property centers items along the main axis in Flexbox?",
+    type: "options",
+    data: {
+      options: [
+        "align-items",
+        "justify-content",
+        "text-align",
+        "place-content"
+      ],
+      answer: 1
+    }
   },
 
   {
     category: "frontend",
-    difficulty: 3,
-    title: "Performance",
-    text: "Explain three ways you would improve the performance of a large JavaScript application containing hundreds of DOM elements."
+    categoryName: "Frontend",
+    difficulty: "Easy",
+    xp: 25,
+    title: "JavaScript Output",
+    description:
+      "What will this JavaScript code print?",
+    type: "options",
+    data: {
+      code:
+`let x = 5;
+let y = 2;
+
+console.log(x + y);`,
+      options: [
+        "52",
+        "7",
+        "10",
+        "3"
+      ],
+      answer: 1
+    }
   },
 
-  // Backend
-  {
-    category: "backend",
-    difficulty: 1,
-    title: "API Basics",
-    text: "Explain the difference between GET, POST, PUT and DELETE HTTP methods."
-  },
+  /* ================= DEBUG ================= */
 
-  {
-    category: "backend",
-    difficulty: 2,
-    title: "REST API",
-    text: "Design REST endpoints for a simple task-management application."
-  },
-
-  {
-    category: "backend",
-    difficulty: 3,
-    title: "Authentication",
-    text: "Explain how JWT-based authentication works from login to accessing a protected API route."
-  },
-
-  // Debug
   {
     category: "debug",
-    difficulty: 1,
+    categoryName: "Debug",
+    difficulty: "Medium",
+    xp: 50,
     title: "Find the Bug",
-    text: "A button click handler is not working. Inspect the event listener logic and identify the most likely causes."
+    description:
+      "Identify the problem in this JavaScript function.",
+    type: "options",
+    data: {
+      code:
+`function calculateTotal(price, quantity) {
+    return price + quantity;
+}`,
+      options: [
+        "Missing semicolon",
+        "Should multiply price × quantity",
+        "quantity must be a string",
+        "There is no bug"
+      ],
+      answer: 1
+    }
   },
 
   {
     category: "debug",
-    difficulty: 2,
-    title: "Async Debugging",
-    text: "A fetch request sometimes returns undefined data. Explain how you would debug the asynchronous JavaScript flow."
+    categoryName: "Debug",
+    difficulty: "Hard",
+    xp: 75,
+    title: "Loop Debugging",
+    description:
+      "Why does this loop never stop?",
+    type: "options",
+    data: {
+      code:
+`let i = 0;
+
+while (i < 5) {
+    console.log(i);
+}`,
+      options: [
+        "i is never incremented",
+        "while cannot be used",
+        "console.log is invalid",
+        "The condition is wrong"
+      ],
+      answer: 0
+    }
+  },
+
+  /* ================= GIT ================= */
+
+  {
+    category: "git",
+    categoryName: "Git",
+    difficulty: "Easy",
+    xp: 25,
+    title: "Create a Branch",
+    description:
+      "Which command creates a new Git branch?",
+    type: "options",
+    data: {
+      options: [
+        "git push new-feature",
+        "git branch new-feature",
+        "git merge new-feature",
+        "git pull new-feature"
+      ],
+      answer: 1
+    }
   },
 
   {
-    category: "debug",
-    difficulty: 3,
-    title: "Race Condition",
-    text: "Two asynchronous API requests update the same UI element. Explain how a race condition could occur and how you would prevent it."
+    category: "git",
+    categoryName: "Git",
+    difficulty: "Medium",
+    xp: 50,
+    title: "Check Repository Status",
+    description:
+      "Which command shows modified and untracked files?",
+    type: "options",
+    data: {
+      options: [
+        "git log",
+        "git status",
+        "git branch",
+        "git diff --name-only"
+      ],
+      answer: 1
+    }
   },
 
-  // System
+  /* ================= BACKEND ================= */
+
+  {
+    category: "backend",
+    categoryName: "Backend",
+    difficulty: "Medium",
+    xp: 50,
+    title: "HTTP Status Code",
+    description:
+      "Which HTTP status code means 'Not Found'?",
+    type: "options",
+    data: {
+      options: [
+        "200",
+        "201",
+        "404",
+        "500"
+      ],
+      answer: 2
+    }
+  },
+
+  {
+    category: "backend",
+    categoryName: "Backend",
+    difficulty: "Easy",
+    xp: 25,
+    title: "GET Request",
+    description:
+      "Which HTTP method is normally used to retrieve data?",
+    type: "options",
+    data: {
+      options: [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      answer: 0
+    }
+  },
+
+  /* ================= SYSTEM ================= */
+
   {
     category: "system",
-    difficulty: 2,
-    title: "URL Shortener",
-    text: "Design the basic architecture of a URL-shortening service that can handle millions of requests."
+    categoryName: "System",
+    difficulty: "Medium",
+    xp: 50,
+    title: "Load Balancer",
+    description:
+      "What is the main purpose of a load balancer?",
+    type: "options",
+    data: {
+      options: [
+        "Store passwords",
+        "Distribute traffic across servers",
+        "Compile JavaScript",
+        "Create database tables"
+      ],
+      answer: 1
+    }
   },
 
   {
     category: "system",
-    difficulty: 3,
-    title: "Scalability",
-    text: "Explain how load balancing and caching can improve the scalability of a web application."
-  },
-
-  // Git
-  {
-    category: "git",
-    difficulty: 1,
-    title: "Git Recovery",
-    text: "You accidentally deleted a local commit. Explain how git reflog can help you recover it."
-  },
-
-  {
-    category: "git",
-    difficulty: 2,
-    title: "Merge Conflict",
-    text: "Explain the correct steps to resolve a Git merge conflict and safely commit the resolved files."
-  },
-
-  {
-    category: "git",
-    difficulty: 3,
-    title: "Git Strategy",
-    text: "Design a Git branching strategy for a team of developers working on a production web application."
+    categoryName: "System",
+    difficulty: "Hard",
+    xp: 75,
+    title: "Caching",
+    description:
+      "What is the main benefit of caching frequently requested data?",
+    type: "options",
+    data: {
+      options: [
+        "Increase database load",
+        "Reduce repeated expensive operations",
+        "Delete old data",
+        "Disable networking"
+      ],
+      answer: 1
+    }
   }
-];
 
+];
 
 /* =========================================================
    STATE
-   ========================================================= */
+========================================================= */
 
-const STORAGE_KEY = "codequest-chaos-stats";
-
-let currentCategory = "all";
+let selectedCategory = "all";
 let currentChallenge = null;
-let timerInterval = null;
-let timerValue = 30;
+let selectedOption = null;
 
-let stats = {
-  completed: 0,
-  skipped: 0,
-  currentStreak: 0,
-  bestStreak: 0,
-  history: []
-};
+let timer = null;
+let timeLeft = 45;
 
+let xp = Number(localStorage.getItem("chaosXP")) || 0;
+let streak = Number(localStorage.getItem("chaosStreak")) || 0;
+let completed = Number(localStorage.getItem("chaosCompleted")) || 0;
+let skipped = Number(localStorage.getItem("chaosSkipped")) || 0;
 
-/* =========================================================
-   DOM
-   ========================================================= */
-
-const chaosBtn = document.getElementById("chaosBtn");
-
-const challengeCard = document.getElementById("challengeCard");
-const challengeText = document.getElementById("challengeText");
-
-const catBadge = document.getElementById("catBadge");
-
-const d1 = document.getElementById("d1");
-const d2 = document.getElementById("d2");
-const d3 = document.getElementById("d3");
-
-const diffLabel = document.getElementById("diffLabel");
-
-const outcomeRow = document.getElementById("outcomeRow");
-
-const surviveBtn = document.getElementById("surviveBtn");
-const retryBtn = document.getElementById("retryBtn");
-const skipBtn = document.getElementById("skipBtn");
-
-const idleHint = document.getElementById("idleHint");
-
-const survivedStat = document.getElementById("survivedStat");
-const skippedStat = document.getElementById("skippedStat");
-const streakStat = document.getElementById("streakStat");
-
-const filterRow = document.getElementById("filterRow");
-
-const copyBtn = document.getElementById("copyBtn");
-
-const timerToggleBtn = document.getElementById("timerToggleBtn");
-const timerDisplay = document.getElementById("timerDisplay");
-const timerCount = document.getElementById("timerCount");
-
-const historySection = document.getElementById("historySection");
-const historyList = document.getElementById("historyList");
-
+let recent =
+  JSON.parse(localStorage.getItem("chaosRecent")) || [];
 
 /* =========================================================
-   LOAD SAVED DATA
-   ========================================================= */
+   ELEMENTS
+========================================================= */
 
-function loadStats() {
+const categoryButtons =
+  document.querySelectorAll(".category-btn");
 
-  try {
+const generateBtn =
+  document.getElementById("generateBtn");
 
-    const saved = localStorage.getItem(STORAGE_KEY);
+const chaosCore =
+  document.getElementById("chaosCore");
 
-    if (!saved) return;
+const challengeSection =
+  document.getElementById("challengeSection");
 
-    const parsed = JSON.parse(saved);
+const categoryBadge =
+  document.getElementById("categoryBadge");
 
-    stats = {
-      ...stats,
-      ...parsed
-    };
+const difficultyBadge =
+  document.getElementById("difficultyBadge");
 
-  } catch (error) {
+const xpReward =
+  document.getElementById("xpReward");
 
-    console.warn("Could not load Chaos Button data.", error);
+const timerDisplay =
+  document.getElementById("timerDisplay");
 
-  }
+const challengeTitle =
+  document.getElementById("challengeTitle");
 
-}
+const challengeDescription =
+  document.getElementById("challengeDescription");
 
+const challengeWorkspace =
+  document.getElementById("challengeWorkspace");
+
+const resultMessage =
+  document.getElementById("resultMessage");
+
+const submitBtn =
+  document.getElementById("submitBtn");
+
+const skipBtn =
+  document.getElementById("skipBtn");
+
+const xpStat =
+  document.getElementById("xpStat");
+
+const streakStat =
+  document.getElementById("streakStat");
+
+const completedStat =
+  document.getElementById("completedStat");
+
+const skippedStat =
+  document.getElementById("skippedStat");
+
+const recentList =
+  document.getElementById("recentList");
 
 /* =========================================================
-   SAVE DATA
-   ========================================================= */
+   CATEGORY FILTER
+========================================================= */
 
-function saveStats() {
+categoryButtons.forEach(button => {
 
-  try {
+  button.addEventListener("click", () => {
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(stats)
+    categoryButtons.forEach(btn =>
+      btn.classList.remove("active")
     );
 
-  } catch (error) {
+    button.classList.add("active");
 
-    console.warn("Could not save Chaos Button data.", error);
-
-  }
-
-}
-
-
-/* =========================================================
-   UPDATE STATS
-   ========================================================= */
-
-function updateStats() {
-
-  survivedStat.textContent = stats.completed;
-  skippedStat.textContent = stats.skipped;
-  streakStat.textContent = stats.bestStreak;
-
-}
-
-
-/* =========================================================
-   CATEGORY NAME
-   ========================================================= */
-
-function categoryName(category) {
-
-  const names = {
-    dsa: "DSA",
-    frontend: "Frontend",
-    backend: "Backend",
-    debug: "Debug",
-    system: "System",
-    git: "Git"
-  };
-
-  return names[category] || category;
-
-}
-
-
-/* =========================================================
-   DIFFICULTY
-   ========================================================= */
-
-function updateDifficulty(level) {
-
-  const dots = [d1, d2, d3];
-
-  dots.forEach((dot, index) => {
-
-    dot.classList.toggle(
-      "active",
-      index < level
-    );
+    selectedCategory =
+      button.dataset.category;
 
   });
 
-  const labels = {
-    1: "Easy",
-    2: "Medium",
-    3: "Hard"
-  };
-
-  diffLabel.textContent =
-    labels[level] || "Unknown";
-
-}
-
+});
 
 /* =========================================================
-   FILTER CHALLENGES
-   ========================================================= */
+   GENERATE
+========================================================= */
 
-function getAvailableChallenges() {
+generateBtn.addEventListener(
+  "click",
+  generateChallenge
+);
 
-  if (currentCategory === "all") {
+function generateChallenge() {
 
-    return challenges;
+  clearInterval(timer);
 
-  }
+  selectedOption = null;
 
-  return challenges.filter(
-    challenge =>
-      challenge.category === currentCategory
-  );
+  resultMessage.className =
+    "result-message hidden";
 
-}
+  resultMessage.textContent = "";
 
+  const available =
+    selectedCategory === "all"
+      ? challenges
+      : challenges.filter(
+          challenge =>
+            challenge.category === selectedCategory
+        );
 
-/* =========================================================
-   RANDOM CHALLENGE
-   ========================================================= */
+  if (!available.length) return;
 
-function getRandomChallenge() {
+  currentChallenge =
+    available[
+      Math.floor(Math.random() * available.length)
+    ];
 
-  const available = getAvailableChallenges();
+  chaosCore.classList.add("generating");
 
-  if (!available.length) {
-
-    return null;
-
-  }
-
-  /*
-   * Prevent the exact same challenge from appearing
-   * twice consecutively when possible.
-   */
-
-  let candidates = available;
-
-  if (available.length > 1 && currentChallenge) {
-
-    candidates = available.filter(
-      challenge =>
-        challenge.text !== currentChallenge.text
-    );
-
-  }
-
-  const randomIndex =
-    Math.floor(Math.random() * candidates.length);
-
-  return candidates[randomIndex];
-
-}
-
-
-/* =========================================================
-   DISPLAY CHALLENGE
-   ========================================================= */
-
-function displayChallenge(challenge) {
-
-  if (!challenge) return;
-
-  currentChallenge = challenge;
-
-  challengeText.textContent =
-    challenge.text;
-
-  catBadge.textContent =
-    categoryName(challenge.category);
-
-  updateDifficulty(
-    challenge.difficulty
-  );
-
-  challengeCard.classList.remove("hidden");
-
-  idleHint.classList.add("hidden");
-
-  outcomeRow.classList.remove("hidden");
-
-  chaosBtn.classList.add("active");
-
-  stopTimer();
-
-  timerDisplay.classList.add("hidden");
-
-  timerValue = 30;
-
-  timerCount.textContent = timerValue;
-
-}
-
-
-/* =========================================================
-   UNLEASH CHAOS
-   ========================================================= */
-
-function unleashChaos() {
-
-  const challenge =
-    getRandomChallenge();
-
-  if (!challenge) return;
-
-  displayChallenge(challenge);
-
-  addHistory(
-    challenge,
-    "generated"
-  );
-
-  chaosBtn.classList.add("pulse");
+  generateBtn.disabled = true;
 
   setTimeout(() => {
 
-    chaosBtn.classList.remove("pulse");
+    chaosCore.classList.remove("generating");
 
-  }, 500);
+    renderChallenge();
+
+    generateBtn.disabled = false;
+
+  }, 800);
 
 }
-
 
 /* =========================================================
-   SURVIVE
-   ========================================================= */
+   RENDER CHALLENGE
+========================================================= */
 
-function surviveChallenge() {
+function renderChallenge() {
 
-  if (!currentChallenge) return;
+  challengeSection.classList.remove("hidden");
 
-  stats.completed++;
+  categoryBadge.textContent =
+    currentChallenge.categoryName.toUpperCase();
 
-  stats.currentStreak++;
+  difficultyBadge.textContent =
+    currentChallenge.difficulty.toUpperCase();
 
-  if (
-    stats.currentStreak >
-    stats.bestStreak
-  ) {
+  xpReward.textContent =
+    `+${currentChallenge.xp} XP`;
 
-    stats.bestStreak =
-      stats.currentStreak;
+  challengeTitle.textContent =
+    currentChallenge.title;
 
-  }
+  challengeDescription.textContent =
+    currentChallenge.description;
 
-  addHistory(
-    currentChallenge,
-    "completed"
-  );
-
-  saveStats();
-
-  updateStats();
-
-  showFeedback(
-    "🔥 Challenge survived! +XP"
-  );
-
-  generateNextChallenge();
-
-}
-
-
-/* =========================================================
-   SKIP
-   ========================================================= */
-
-function skipChallenge() {
-
-  if (!currentChallenge) return;
-
-  stats.skipped++;
-
-  stats.currentStreak = 0;
-
-  addHistory(
-    currentChallenge,
-    "skipped"
-  );
-
-  saveStats();
-
-  updateStats();
-
-  showFeedback(
-    "💀 Challenge skipped. Streak reset."
-  );
-
-  generateNextChallenge();
-
-}
-
-
-/* =========================================================
-   TRY AGAIN
-   ========================================================= */
-
-function retryChallenge() {
-
-  const challenge =
-    getRandomChallenge();
-
-  if (!challenge) return;
-
-  displayChallenge(challenge);
-
-  addHistory(
-    challenge,
-    "retry"
-  );
-
-}
-
-
-/* =========================================================
-   NEXT CHALLENGE
-   ========================================================= */
-
-function generateNextChallenge() {
-
-  const challenge =
-    getRandomChallenge();
-
-  if (!challenge) return;
-
-  displayChallenge(challenge);
-
-}
-
-
-/* =========================================================
-   COPY
-   ========================================================= */
-
-async function copyChallenge() {
-
-  if (!currentChallenge) return;
-
-  const text =
-    `${categoryName(currentChallenge.category)} — ${currentChallenge.text}`;
-
-  try {
-
-    await navigator.clipboard.writeText(text);
-
-    showFeedback(
-      "📋 Challenge copied!"
-    );
-
-  } catch (error) {
-
-    /*
-     * Fallback for browsers where
-     * Clipboard API isn't available.
-     */
-
-    const textarea =
-      document.createElement("textarea");
-
-    textarea.value = text;
-
-    document.body.appendChild(textarea);
-
-    textarea.select();
-
-    document.execCommand("copy");
-
-    textarea.remove();
-
-    showFeedback(
-      "📋 Challenge copied!"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   TIMER
-   ========================================================= */
-
-function startTimer() {
-
-  if (!currentChallenge) return;
-
-  if (timerInterval) return;
-
-  timerDisplay.classList.remove(
-    "hidden"
-  );
-
-  timerToggleBtn.textContent = "⏸";
-
-  timerInterval = setInterval(() => {
-
-    timerValue--;
-
-    timerCount.textContent =
-      timerValue;
-
-    if (timerValue <= 0) {
-
-      stopTimer();
-
-      showFeedback(
-        "⏰ Time's up!"
-      );
-
-      timerCount.textContent = "0";
-
-    }
-
-  }, 1000);
-
-}
-
-
-function stopTimer() {
-
-  if (timerInterval) {
-
-    clearInterval(timerInterval);
-
-    timerInterval = null;
-
-  }
-
-  timerToggleBtn.textContent = "⏱";
-
-}
-
-
-function toggleTimer() {
-
-  if (!currentChallenge) return;
-
-  if (timerInterval) {
-
-    stopTimer();
-
-    return;
-
-  }
-
-  if (timerValue <= 0) {
-
-    timerValue = 30;
-
-    timerCount.textContent =
-      timerValue;
-
-  }
+  renderWorkspace();
 
   startTimer();
 
-}
-
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
-
-function addHistory(
-  challenge,
-  status
-) {
-
-  const item = {
-
-    category: challenge.category,
-
-    difficulty:
-      challenge.difficulty,
-
-    text:
-      challenge.text,
-
-    status,
-
-    time:
-      Date.now()
-
-  };
-
-  stats.history.unshift(item);
-
-  /*
-   * Keep the last 8 entries.
-   */
-
-  stats.history =
-    stats.history.slice(0, 8);
-
-  renderHistory();
-
-  saveStats();
-
-}
-
-
-function renderHistory() {
-
-  if (!stats.history.length) {
-
-    historySection.classList.add(
-      "hidden"
-    );
-
-    return;
-
-  }
-
-  historySection.classList.remove(
-    "hidden"
-  );
-
-  historyList.innerHTML = "";
-
-  stats.history.forEach(item => {
-
-    const element =
-      document.createElement("div");
-
-    element.className =
-      "history-item";
-
-    const statusIcon = {
-
-      completed: "✅",
-
-      skipped: "💀",
-
-      retry: "🔄",
-
-      generated: "☄️"
-
-    }[item.status] || "☄️";
-
-    element.innerHTML = `
-
-      <span class="history-icon">
-        ${statusIcon}
-      </span>
-
-      <div class="history-content">
-
-        <strong>
-          ${escapeHTML(
-            categoryName(item.category)
-          )}
-        </strong>
-
-        <span>
-          ${escapeHTML(item.text)}
-        </span>
-
-      </div>
-
-    `;
-
-    historyList.appendChild(
-      element
-    );
-
+  challengeSection.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
   });
 
 }
 
-
 /* =========================================================
-   ESCAPE HTML
-   ========================================================= */
+   WORKSPACE
+========================================================= */
 
-function escapeHTML(value) {
+function renderWorkspace() {
 
-  const div =
-    document.createElement("div");
+  challengeWorkspace.innerHTML = "";
 
-  div.textContent = value;
+  const data =
+    currentChallenge.data;
 
-  return div.innerHTML;
+  /* INPUT */
 
-}
+  if (currentChallenge.type === "input") {
 
+    if (data.numbers) {
 
-/* =========================================================
-   FEEDBACK
-   ========================================================= */
+      const numbers =
+        document.createElement("div");
 
-function showFeedback(message) {
+      numbers.className = "code-block";
 
-  let feedback =
-    document.getElementById(
-      "chaosFeedback"
-    );
+      numbers.textContent =
+        `[ ${data.numbers.join(", ")} , ? ]`;
 
-  if (!feedback) {
+      challengeWorkspace.appendChild(numbers);
 
-    feedback =
+    }
+
+    if (data.value) {
+
+      const code =
+        document.createElement("div");
+
+      code.className = "code-block";
+
+      code.textContent =
+        data.value;
+
+      challengeWorkspace.appendChild(code);
+
+    }
+
+    const input =
+      document.createElement("input");
+
+    input.className =
+      "answer-input";
+
+    input.id =
+      "answerInput";
+
+    input.placeholder =
+      "Enter your answer...";
+
+    challengeWorkspace.appendChild(input);
+
+    return;
+  }
+
+  /* OPTIONS */
+
+  if (currentChallenge.type === "options") {
+
+    if (data.code) {
+
+      const code =
+        document.createElement("pre");
+
+      code.className =
+        "code-block";
+
+      code.textContent =
+        data.code;
+
+      challengeWorkspace.appendChild(code);
+
+    }
+
+    const optionGrid =
       document.createElement("div");
 
-    feedback.id =
-      "chaosFeedback";
+    optionGrid.className =
+      "option-grid";
 
-    feedback.className =
-      "chaos-feedback";
+    data.options.forEach(
+      (option, index) => {
 
-    document.body.appendChild(
-      feedback
+        const button =
+          document.createElement("button");
+
+        button.className =
+          "option-btn";
+
+        button.textContent =
+          option;
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            document
+              .querySelectorAll(".option-btn")
+              .forEach(btn =>
+                btn.classList.remove("selected")
+              );
+
+            button.classList.add("selected");
+
+            selectedOption = index;
+
+          }
+        );
+
+        optionGrid.appendChild(button);
+
+      }
+    );
+
+    challengeWorkspace.appendChild(
+      optionGrid
     );
 
   }
 
-  feedback.textContent =
-    message;
+}
 
-  feedback.classList.add(
-    "show"
-  );
+/* =========================================================
+   TIMER
+========================================================= */
 
-  clearTimeout(
-    feedback.hideTimeout
-  );
+function startTimer() {
 
-  feedback.hideTimeout =
-    setTimeout(() => {
+  clearInterval(timer);
 
-      feedback.classList.remove(
-        "show"
-      );
+  timeLeft = 45;
 
-    }, 2200);
+  updateTimer();
+
+  timer =
+    setInterval(() => {
+
+      timeLeft--;
+
+      updateTimer();
+
+      if (timeLeft <= 0) {
+
+        clearInterval(timer);
+
+        showResult(
+          false,
+          "⏱ Time's up! Chaos wins this round."
+        );
+
+        submitBtn.disabled = true;
+
+      }
+
+    }, 1000);
 
 }
 
+function updateTimer() {
+
+  timerDisplay.textContent =
+    `⏱ ${timeLeft}s`;
+
+  if (timeLeft <= 10) {
+
+    timerDisplay.style.color =
+      "#fb7185";
+
+  } else {
+
+    timerDisplay.style.color =
+      "";
+
+  }
+
+}
 
 /* =========================================================
-   FILTER BUTTONS
-   ========================================================= */
+   SUBMIT
+========================================================= */
 
-filterRow.addEventListener(
+submitBtn.addEventListener(
   "click",
-  event => {
+  checkAnswer
+);
 
-    const button =
-      event.target.closest(
-        ".filter-btn"
+function checkAnswer() {
+
+  if (!currentChallenge) return;
+
+  let correct = false;
+
+  if (currentChallenge.type === "input") {
+
+    const input =
+      document.getElementById(
+        "answerInput"
       );
 
-    if (!button) return;
+    if (!input) return;
+
+    const userAnswer =
+      input.value
+        .trim()
+        .toUpperCase();
+
+    correct =
+      userAnswer ===
+      currentChallenge.data.answer
+        .toUpperCase();
+
+  }
+
+  if (currentChallenge.type === "options") {
+
+    if (selectedOption === null) {
+
+      showResult(
+        false,
+        "⚠️ Select an answer first."
+      );
+
+      return;
+
+    }
+
+    correct =
+      selectedOption ===
+      currentChallenge.data.answer;
 
     document
-      .querySelectorAll(".filter-btn")
-      .forEach(btn => {
+      .querySelectorAll(".option-btn")
+      .forEach((button, index) => {
 
-        btn.classList.remove(
-          "active"
-        );
+        if (
+          index ===
+          currentChallenge.data.answer
+        ) {
+
+          button.classList.add(
+            "correct"
+          );
+
+        }
+
+        if (
+          index === selectedOption &&
+          !correct
+        ) {
+
+          button.classList.add(
+            "wrong"
+          );
+
+        }
 
       });
 
-    button.classList.add(
-      "active"
+  }
+
+  clearInterval(timer);
+
+  if (correct) {
+
+    completed++;
+
+    streak++;
+
+    xp += currentChallenge.xp;
+
+    saveState();
+
+    updateStats();
+
+    showResult(
+      true,
+      `🎉 Correct! +${currentChallenge.xp} XP`
     );
 
-    currentCategory =
-      button.dataset.cat;
+    addRecent(
+      currentChallenge,
+      true
+    );
 
-    /*
-     * If a challenge is currently
-     * displayed, generate one
-     * matching the new category.
-     */
+    submitBtn.disabled = true;
 
-    if (!challengeCard.classList.contains("hidden")) {
+  } else {
 
-      unleashChaos();
+    streak = 0;
 
-    }
+    saveState();
+
+    updateStats();
+
+    showResult(
+      false,
+      "❌ Not quite. Try the next challenge."
+    );
+
+    addRecent(
+      currentChallenge,
+      false
+    );
 
   }
-);
 
+}
 
 /* =========================================================
-   EVENT LISTENERS
-   ========================================================= */
+   RESULT
+========================================================= */
 
-chaosBtn.addEventListener(
-  "click",
-  unleashChaos
-);
+function showResult(
+  success,
+  message
+) {
 
-surviveBtn.addEventListener(
-  "click",
-  surviveChallenge
-);
+  resultMessage.className =
+    `result-message ${
+      success
+        ? "success"
+        : "error"
+    }`;
 
-retryBtn.addEventListener(
-  "click",
-  retryChallenge
-);
+  resultMessage.textContent =
+    message;
+
+}
+
+/* =========================================================
+   SKIP
+========================================================= */
 
 skipBtn.addEventListener(
   "click",
-  skipChallenge
-);
+  () => {
 
-copyBtn.addEventListener(
-  "click",
-  copyChallenge
-);
+    if (!currentChallenge) return;
 
-timerToggleBtn.addEventListener(
-  "click",
-  toggleTimer
-);
+    clearInterval(timer);
 
+    skipped++;
 
-/* =========================================================
-   KEYBOARD SUPPORT
-   ========================================================= */
+    streak = 0;
 
-document.addEventListener(
-  "keydown",
-  event => {
+    saveState();
 
-    /*
-     * Space or Enter while not typing
-     * triggers Chaos.
-     */
+    updateStats();
 
-    const tag =
-      document.activeElement?.tagName;
+    addRecent(
+      currentChallenge,
+      false,
+      true
+    );
 
-    const isTyping =
-      tag === "INPUT" ||
-      tag === "TEXTAREA";
+    showResult(
+      false,
+      "💀 Challenge skipped. Chaos continues..."
+    );
 
-    if (isTyping) return;
-
-    if (
-      event.code === "Space" ||
-      event.code === "Enter"
-    ) {
-
-      event.preventDefault();
-
-      unleashChaos();
-
-    }
+    submitBtn.disabled = false;
 
   }
 );
 
+/* =========================================================
+   RECENT
+========================================================= */
+
+function addRecent(
+  challenge,
+  success,
+  wasSkipped = false
+) {
+
+  recent.unshift({
+
+    title:
+      challenge.title,
+
+    category:
+      challenge.categoryName,
+
+    success,
+
+    skipped: wasSkipped,
+
+    time:
+      new Date().toLocaleTimeString(
+        [],
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      )
+
+  });
+
+  recent =
+    recent.slice(0, 6);
+
+  localStorage.setItem(
+    "chaosRecent",
+    JSON.stringify(recent)
+  );
+
+  renderRecent();
+
+}
+
+function renderRecent() {
+
+  if (!recent.length) {
+
+    recentList.innerHTML = `
+      <div class="empty-state">
+        No challenges yet.<br>
+        Generate your first chaos.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  recentList.innerHTML =
+    recent.map(item => {
+
+      let icon =
+        item.skipped
+          ? "💀"
+          : item.success
+            ? "✅"
+            : "❌";
+
+      return `
+        <div class="recent-item">
+
+          <span>
+            ${icon}
+            ${escapeHTML(item.title)}
+          </span>
+
+          <small>
+            ${item.category}
+            • ${item.time}
+          </small>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
 
 /* =========================================================
-   INITIALIZE
-   ========================================================= */
+   STATS
+========================================================= */
 
-function initialize() {
+function updateStats() {
 
-  loadStats();
+  xpStat.textContent =
+    xp;
 
-  updateStats();
+  streakStat.textContent =
+    streak;
 
-  renderHistory();
+  completedStat.textContent =
+    completed;
 
-  challengeCard.classList.add(
-    "hidden"
+  skippedStat.textContent =
+    skipped;
+
+}
+
+function saveState() {
+
+  localStorage.setItem(
+    "chaosXP",
+    xp
   );
 
-  outcomeRow.classList.add(
-    "hidden"
+  localStorage.setItem(
+    "chaosStreak",
+    streak
   );
 
-  idleHint.classList.remove(
-    "hidden"
+  localStorage.setItem(
+    "chaosCompleted",
+    completed
+  );
+
+  localStorage.setItem(
+    "chaosSkipped",
+    skipped
   );
 
 }
 
+/* =========================================================
+   SECURITY
+========================================================= */
 
-initialize();
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+/* =========================================================
+   INIT
+========================================================= */
+
+updateStats();
+
+renderRecent();

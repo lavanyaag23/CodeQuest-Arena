@@ -3,318 +3,260 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Chaos Button - Random coding challenges for developers">
-  <title>Chaos Button · CodeQuest Arena</title>
+
+  <title>Chaos Mode | CodeQuest Arena</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <div class="background-grid"></div>
+  <div class="glow glow-purple"></div>
+  <div class="glow glow-cyan"></div>
+
   <main class="app">
 
-    <section class="panel">
+    <!-- NAVBAR -->
+    <nav class="navbar">
 
-      <!-- HERO -->
-      <header class="hero">
+      <a href="../../index.html" class="brand">
+        <span class="brand-icon">CQ</span>
+        <span>CodeQuest Arena</span>
+      </a>
 
-        <div class="hero-badge">
-          <span>☄️ Developer Challenge</span>
+      <div class="nav-right">
+        <span class="mode-label">DEVELOPER LAB</span>
+
+        <a href="../../index.html" class="back-btn">
+          ← Arena
+        </a>
+      </div>
+
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="badge">
+        ⚡ RANDOM DEVELOPER CHALLENGE
+      </div>
+
+      <h1>
+        <span>CHAOS</span> MODE
+      </h1>
+
+      <p>
+        You don't choose the challenge.
+        <strong>Chaos does.</strong>
+      </p>
+
+      <p class="hero-subtitle">
+        Solve interactive coding challenges directly inside CodeQuest Arena.
+      </p>
+
+    </section>
+
+    <!-- PLAYER STATS -->
+    <section class="stats">
+
+      <div class="stat-card">
+        <span class="stat-icon">⚡</span>
+        <div>
+          <strong id="xpStat">0</strong>
+          <small>Total XP</small>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon">🔥</span>
+        <div>
+          <strong id="streakStat">0</strong>
+          <small>Streak</small>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon">✅</span>
+        <div>
+          <strong id="completedStat">0</strong>
+          <small>Completed</small>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-icon">💀</span>
+        <div>
+          <strong id="skippedStat">0</strong>
+          <small>Skipped</small>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CONTROLS -->
+    <section class="controls">
+
+      <div class="control-title">
+        <span>Choose your chaos</span>
+        <small>or let fate decide</small>
+      </div>
+
+      <div class="category-row" id="categoryRow">
+
+        <button class="category-btn active" data-category="all">
+          🎲 All
+        </button>
+
+        <button class="category-btn" data-category="dsa">
+          🧠 DSA
+        </button>
+
+        <button class="category-btn" data-category="frontend">
+          🎨 Frontend
+        </button>
+
+        <button class="category-btn" data-category="debug">
+          🐞 Debug
+        </button>
+
+        <button class="category-btn" data-category="git">
+          🔀 Git
+        </button>
+
+        <button class="category-btn" data-category="backend">
+          ⚙️ Backend
+        </button>
+
+        <button class="category-btn" data-category="system">
+          🖥️ System
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- CHAOS CORE -->
+    <section class="chaos-area">
+
+      <div class="chaos-core" id="chaosCore">
+
+        <div class="core-ring ring-one"></div>
+        <div class="core-ring ring-two"></div>
+        <div class="core-ring ring-three"></div>
+
+        <div class="core-content">
+          <span class="core-icon">☄️</span>
+          <span class="core-text">CHAOS</span>
+          <small>READY</small>
         </div>
 
-        <h1>
-          Chaos
-          <span>Button</span>
-        </h1>
+      </div>
 
-        <p class="hero-subtitle">
-          Click once and receive a random coding challenge.
-          Improve DSA, Frontend, Git, Debugging and System Design
-          through daily chaos.
-        </p>
+      <button class="generate-btn" id="generateBtn">
+        <span>⚡</span>
+        GENERATE CHALLENGE
+      </button>
 
-        <!-- STATS -->
-        <div class="hero-stats">
+      <p class="generate-hint">
+        A random interactive challenge will appear.
+      </p>
 
-          <div class="stat-card">
-            <div class="stat-number" id="survivedStat">0</div>
-            <div class="stat-text">
-              Challenges Completed
-            </div>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section class="challenge-section hidden" id="challengeSection">
+
+      <div class="challenge-card">
+
+        <!-- CARD HEADER -->
+        <div class="challenge-header">
+
+          <div>
+            <span class="category-badge" id="categoryBadge">
+              DSA
+            </span>
+
+            <span class="difficulty-badge" id="difficultyBadge">
+              EASY
+            </span>
           </div>
 
-          <div class="stat-card">
-            <div class="stat-number" id="skippedStat">0</div>
-            <div class="stat-text">
-              Skipped
-            </div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-number" id="streakStat">0</div>
-            <div class="stat-text">
-              Best Streak
-            </div>
-          </div>
-
-        </div>
-
-      </header>
-
-      <!-- CATEGORY FILTER -->
-      <section class="filters" aria-label="Challenge categories">
-
-        <div class="filter-row" id="filterRow">
-
-          <button
-            class="filter-btn active"
-            data-cat="all"
-            type="button"
-          >
-            All
-          </button>
-
-          <button
-            class="filter-btn"
-            data-cat="dsa"
-            type="button"
-          >
-            DSA
-          </button>
-
-          <button
-            class="filter-btn"
-            data-cat="frontend"
-            type="button"
-          >
-            Frontend
-          </button>
-
-          <button
-            class="filter-btn"
-            data-cat="backend"
-            type="button"
-          >
-            Backend
-          </button>
-
-          <button
-            class="filter-btn"
-            data-cat="debug"
-            type="button"
-          >
-            Debug
-          </button>
-
-          <button
-            class="filter-btn"
-            data-cat="system"
-            type="button"
-          >
-            System
-          </button>
-
-          <button
-            class="filter-btn"
-            data-cat="git"
-            type="button"
-          >
-            Git
-          </button>
-
-        </div>
-
-      </section>
-
-      <!-- CHALLENGE CARD -->
-      <section
-        class="challenge-card hidden"
-        id="challengeCard"
-        aria-live="polite"
-      >
-
-        <div class="card-top">
-
-          <span
-            class="cat-badge"
-            id="catBadge"
-          >
-            DSA
-          </span>
-
-          <div class="difficulty">
-
-            <div class="diff-dots-row">
-
-              <span class="diff-dot" id="d1"></span>
-              <span class="diff-dot" id="d2"></span>
-              <span class="diff-dot" id="d3"></span>
-
-              <span
-                class="diff-label"
-                id="diffLabel"
-              >
-                Easy
-              </span>
-
-            </div>
-
+          <div class="challenge-meta">
+            <span id="xpReward">+25 XP</span>
+            <span id="timerDisplay">⏱ 45s</span>
           </div>
 
         </div>
 
-        <p
-          class="challenge-text"
-          id="challengeText"
-        >
+        <!-- TITLE -->
+        <h2 id="challengeTitle">
+          Challenge
+        </h2>
+
+        <!-- DESCRIPTION -->
+        <p class="challenge-description" id="challengeDescription">
           Your challenge will appear here.
         </p>
 
-        <!-- CARD FOOTER -->
-        <div class="challenge-footer">
+        <!-- INTERACTIVE AREA -->
+        <div class="challenge-workspace" id="challengeWorkspace">
+        </div>
 
-          <span
-            class="timer-display hidden"
-            id="timerDisplay"
-          >
-            ⏱
-            <span id="timerCount">30</span>s
-          </span>
+        <!-- RESULT -->
+        <div class="result-message hidden" id="resultMessage">
+        </div>
 
-          <div class="card-actions">
+        <!-- ACTIONS -->
+        <div class="challenge-actions">
 
-            <button
-              class="icon-btn"
-              id="copyBtn"
-              type="button"
-              title="Copy challenge"
-              aria-label="Copy challenge"
-            >
-              📋
-            </button>
+          <button class="submit-btn" id="submitBtn">
+            ✓ Submit Answer
+          </button>
 
-            <button
-              class="icon-btn"
-              id="timerToggleBtn"
-              type="button"
-              title="Start timer"
-              aria-label="Start timer"
-            >
-              ⏱
-            </button>
-
-          </div>
+          <button class="skip-btn" id="skipBtn">
+            Skip →
+          </button>
 
         </div>
 
-      </section>
-
-      <!-- IDLE MESSAGE -->
-      <div
-        class="idle-hint-box"
-        id="idleHint"
-      >
-
-        <p>
-          Hit the button below to receive your challenge.
-        </p>
-
-        <p class="hint-sub">
-          Survive it, skip it, or try again.
-        </p>
-
       </div>
-
-      <!-- CHAOS BUTTON -->
-      <button
-        class="chaos-btn"
-        id="chaosBtn"
-        type="button"
-      >
-
-        <span class="chaos-icon">
-          ☄️
-        </span>
-
-        <span class="chaos-label">
-          UNLEASH CHAOS
-        </span>
-
-      </button>
-
-      <!-- OUTCOME BUTTONS -->
-      <div
-        class="outcome-row hidden"
-        id="outcomeRow"
-      >
-
-        <button
-          class="outcome-btn survive"
-          id="surviveBtn"
-          type="button"
-        >
-          ✅ Survived
-        </button>
-
-        <button
-          class="outcome-btn retry"
-          id="retryBtn"
-          type="button"
-        >
-          🔄 Try Again
-        </button>
-
-        <button
-          class="outcome-btn skip"
-          id="skipBtn"
-          type="button"
-        >
-          💀 Too Scary
-        </button>
-
-      </div>
-
-      <!-- HISTORY -->
-      <section
-        class="history-section hidden"
-        id="historySection"
-      >
-
-        <p class="history-label">
-          Recent Chaos
-        </p>
-
-        <div
-          class="history-list"
-          id="historyList"
-        ></div>
-
-      </section>
-
-      <!-- FOOTER -->
-      <footer class="chaos-footer">
-
-        <span>
-          CodeQuest Arena
-        </span>
-
-        <span>•</span>
-
-        <span>
-          Random challenges. Real skills.
-        </span>
-
-      </footer>
 
     </section>
+
+    <!-- RECENT -->
+    <section class="recent-section">
+
+      <div class="section-heading">
+        <div>
+          <span>RECENT CHAOS</span>
+          <small>Your latest challenges</small>
+        </div>
+      </div>
+
+      <div class="recent-list" id="recentList">
+
+        <div class="empty-state">
+          No challenges yet.
+          <br>
+          Generate your first chaos.
+        </div>
+
+      </div>
+
+    </section>
+
+    <footer>
+      <span>CodeQuest Arena</span>
+      <span>•</span>
+      <span>Chaos Mode</span>
+      <span>•</span>
+      <span>Built by Lavanya Agrawal</span>
+    </footer>
 
   </main>
 
